@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management - UniPortal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2 class="logo">Uni<span>Portal</span></h2>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="userManagement.html">User Management</a></li>
+        <li><a href="courseManagement.html" class="active">Course Management</a></li>
+        <li><a href="departmentManagement.html">Department Management</a></li>
+        <li><a href="attendanceManagement.html">Attendance Management</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h1>Course Management</h1>
+      </header>
+
+      <div class="card">
+        <div class="search-section">
+          <input type="text" id="searchTermCourse" placeholder="Search courses..." oninput="searchCourses()">
+          <button class="search-btn" onclick="searchCourses()">Search</button>
+        </div>
+
+        <form method="POST" id="addCourseForm">
+          <div class="form">
+            <input type="text" name="course_name" id="course_name" placeholder="Enter Course Name" required>
+            <input type="text" name="course_code" id="course_code" placeholder="Enter Course Code" required>
+            <input type="text" name="term_name" id="term_name" placeholder="Enter Term Name" required>
+            <input type="text" name="term_code" id="term_code" placeholder="Enter Term Code" required>
+
+            <button class="btn-primary" type="submit">Add Course</button>
+          </div>
+        </form>
+
+        <div class="list-caption">Courses List</div>
+        <ul id="courseList"></ul>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

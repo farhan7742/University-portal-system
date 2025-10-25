@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - UniPortal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2 class="logo">Uni<span>Portal</span></h2>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="userManagement.html" class="active">User Management</a></li>
+        <li><a href="courseManagement.html">Course Management</a></li>
+        <li><a href="departmentManagement.html">Department Management</a></li>
+        <li><a href="attendanceManagement.html">Attendance Management</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h1>User Management</h1>
+      </header>
+
+      <div class="card">
+        <div class="search-section">
+          <input type="text" id="searchTermUser" placeholder="Search users..." oninput="searchUsers()">
+          <button class="search-btn" onclick="searchUsers()">Search</button>
+        </div>
+
+        <form method="POST" id="addUserForm">
+          <div class="form">
+            <input type="text" name="name" id="name" placeholder="Enter Full Name" required>
+            <input type="email" name="email" id="email" placeholder="Enter Email Address" required>
+            <input type="tel" name="phone_number" id="phone_number" placeholder="Enter Phone Number" required>
+
+            <button class="btn-primary" type="submit">Add User</button>
+          </div>
+        </form>
+
+        <div class="list-caption">Users List</div>
+        <ul id="userList"></ul>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
