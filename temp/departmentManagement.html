@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Management - UniPortal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2 class="logo">Uni<span>Portal</span></h2>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="userManagement.html">User Management</a></li>
+        <li><a href="courseManagement.html">Course Management</a></li>
+        <li><a href="departmentManagement.html" class="active">Department Management</a></li>
+        <li><a href="attendanceManagement.html">Attendance Management</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h1>Department Management</h1>
+      </header>
+
+      <div class="card">
+        <div class="search-section">
+          <input type="text" id="searchTermDepartment" placeholder="Search departments..." oninput="searchDepartments()">
+          <button class="search-btn" onclick="searchDepartments()">Search</button>
+        </div>
+
+        <!-- Add Department Form -->
+        <form method="POST" id="addDepartmentForm">
+          <div class="form">
+            <input type="text" name="dept_name" id="dept_name" placeholder="Enter Department Name" required>
+            <input type="text" name="dept_code" id="dept_code" placeholder="Enter Department Code" required>
+            <input type="text" name="program_name" id="program_name" placeholder="Enter Program Name">
+            <input type="text" name="faculty" id="faculty" placeholder="Enter Faculty Name">
+            <input type="number" name="year" id="year" placeholder="Enter Academic Year" min="2000" max="2030">
+
+            <button class="btn-primary" type="submit">Add Department</button>
+          </div>
+        </form>
+
+        <div class="list-caption">Departments List</div>
+        <ul id="departmentList"></ul>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

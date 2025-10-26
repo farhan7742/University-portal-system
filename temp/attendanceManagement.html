@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Management - UniPortal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Attendance Specific Styles */
+        .attendance-controls {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .students-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            border: 1px solid #ecf0f1;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+
+        .student-attendance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e1e8ed;
+            background: white;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .student-attendance-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .student-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .student-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+
+        .student-id {
+            color: #3498db;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .student-email {
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+
+        .attendance-mark {
+            min-width: 120px;
+        }
+
+        .attendance-dropdown {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+
+        .attendance-dropdown:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .course-info {
+            background: #e3f2fd;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2196f3;
+            font-weight: bold;
+        }
+
+        .stats-container {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e1e8ed;
+        }
+
+        .attendance-stats h4 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #ecf0f1;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            align-items: end;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e1e8ed;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .status-present {
+            background: #d4edda;
+            color: #155724;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-absent {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #3498db;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .student-attendance-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .attendance-mark {
+                align-self: stretch;
+            }
+            
+            .attendance-dropdown {
+                width: 100%;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .attendance-controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h2 class="logo">Uni<span>Portal</span></h2>
+      <ul>
+        <li><a href="index.html">Dashboard</a></li>
+        <li><a href="userManagement.html">User Management</a></li>
+        <li><a href="courseManagement.html">Course Management</a></li>
+        <li><a href="departmentManagement.html">Department Management</a></li>
+        <li><a href="attendanceManagement.html" class="active">Attendance Management</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <h1>Attendance Management</h1>
+      </header>
+
+      <div class="card">
+        <!-- Mark Attendance Section -->
+        <div class="form-section">
+          <h3>Mark Attendance</h3>
+          <form id="markAttendanceForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="attendanceCourse">Select Course:</label>
+                <select id="attendanceCourse" required>
+                  <option value="">Select Course</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="attendanceDate">Date:</label>
+                <input type="date" id="attendanceDate" required>
+              </div>
+            </div>
+            <button type="button" class="btn-primary" onclick="loadStudentsForAttendance()">Load Students</button>
+          </form>
+        </div>
+
+        <!-- Students List for Attendance -->
+        <div id="studentsAttendanceSection" style="display: none;">
+          <h3>Mark Attendance for Students</h3>
+          <div class="attendance-controls">
+            <button type="button" class="btn-secondary" onclick="markAllPresent()">Mark All Present</button>
+            <button type="button" class="btn-secondary" onclick="markAllAbsent()">Mark All Absent</button>
+          </div>
+          <div id="studentsList" class="students-list"></div>
+          <button type="button" class="btn-primary" onclick="submitAttendance()">Submit Attendance</button>
+        </div>
+
+        <!-- View Attendance Records -->
+        <div class="search-section">
+          <h3>View Attendance Records</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <select id="viewCourse">
+                <option value="">Select Course</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <input type="date" id="viewDate">
+            </div>
+            <button type="button" class="btn-primary" onclick="viewAttendanceRecords()">View Records</button>
+          </div>
+        </div>
+
+        <!-- Attendance Statistics -->
+        <div id="attendanceStats" class="stats-container">
+          <div class="no-data">Select a course to view statistics</div>
+        </div>
+
+        <!-- Attendance Records -->
+        <div class="list-caption">Attendance Records</div>
+        <div id="attendanceRecords" class="no-data">No records to display</div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ==================== ATTENDANCE MANAGEMENT ====================
+    function setupAttendanceForm() {
+        console.log("Setting up attendance form...");
+        loadCoursesForAttendance();
+        loadCoursesForView();
+        
+        // Set default date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('attendanceDate').value = today;
+        document.getElementById('viewDate').value = today;
+    }
+
+    function loadCoursesForAttendance() {
+        console.log("Loading courses for attendance...");
+        
+        fetch('getCourses.php?type=dropdown')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log("Courses loaded:", data);
+            document.getElementById('attendanceCourse').innerHTML = '<option value="">Select Course</option>' + data;
+        })
+        .catch(error => {
+            console.error('Error loading courses:', error);
+            document.getElementById('attendanceCourse').innerHTML = '<option value="">Error loading courses</option>';
+            showNotification('Error loading courses', 'error');
+        });
+    }
+
+    function loadCoursesForView() {
+        fetch('getCourses.php?type=dropdown')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById('viewCourse').innerHTML = '<option value="">Select Course</option>' + data;
+        })
+        .catch(error => {
+            console.error('Error loading courses:', error);
+            document.getElementById('viewCourse').innerHTML = '<option value="">Error loading courses</option>';
+            showNotification('Error loading courses', 'error');
+        });
+    }
+
+    function loadStudentsForAttendance() {
+        const courseId = document.getElementById('attendanceCourse').value;
+        const date = document.getElementById('attendanceDate').value;
+
+        if (!courseId || !date) {
+            showNotification('Please select course and date', 'error');
+            return;
+        }
+
+        console.log("Loading students for course:", courseId, "date:", date);
+        
+        document.getElementById('studentsList').innerHTML = '<div class="loading">Loading students...</div>';
+        document.getElementById('studentsAttendanceSection').style.display = 'block';
+
+        const formData = new FormData();
+        formData.append('course_id', courseId);
+        formData.append('date', date);
+
+        fetch('getStudentsForAttendance.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log("Students data received:", data);
+            document.getElementById('studentsList').innerHTML = data;
+            
+            // Check if we got any student data
+            const studentItems = document.querySelectorAll('.student-attendance-item');
+            if (studentItems.length > 0) {
+                showNotification('Students loaded successfully!', 'success');
+            }
+        })
+        .catch(error => {
+            console.error('Error loading students:', error);
+            document.getElementById('studentsList').innerHTML = '<div class="no-data">Error loading students</div>';
+            showNotification('Error loading students', 'error');
+        });
+    }
+
+    function markAllPresent() {
+        const dropdowns = document.querySelectorAll('.attendance-dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.value = 'present';
+        });
+        showNotification('All students marked as Present', 'info');
+    }
+
+    function markAllAbsent() {
+        const dropdowns = document.querySelectorAll('.attendance-dropdown');
+        dropdowns.forEach(dropdown => {
+            dropdown.value = 'absent';
+        });
+        showNotification('All students marked as Absent', 'info');
+    }
+
+    function submitAttendance() {
+        const courseId = document.getElementById('attendanceCourse').value;
+        const date = document.getElementById('attendanceDate').value;
+        const dropdowns = document.querySelectorAll('.attendance-dropdown');
+
+        if (dropdowns.length === 0) {
+            showNotification('No students to mark attendance for', 'error');
+            return;
+        }
+
+        const attendanceData = [];
+        dropdowns.forEach(dropdown => {
+            attendanceData.push({
+                student_id: dropdown.dataset.studentId,
+                status: dropdown.value
+            });
+        });
+
+        const formData = new FormData();
+        formData.append('course_id', courseId);
+        formData.append('date', date);
+        formData.append('attendance_data', JSON.stringify(attendanceData));
+
+        fetch('submitAttendance.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes('successfully') || data.includes('Present') || data.includes('Absent')) {
+                showNotification(data, 'success');
+                document.getElementById('studentsAttendanceSection').style.display = 'none';
+                calculateAttendanceStats(courseId);
+            } else {
+                showNotification(data, 'error');
+            }
+        })
+        .catch(error => {
+            showNotification('Error submitting attendance: ' + error, 'error');
+        });
+    }
+
+    function viewAttendanceRecords() {
+        const courseId = document.getElementById('viewCourse').value;
+        const date = document.getElementById('viewDate').value;
+
+        if (!courseId) {
+            showNotification('Please select a course', 'error');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('course_id', courseId);
+        if (date) formData.append('date', date);
+
+        document.getElementById('attendanceRecords').innerHTML = '<div class="loading">Loading records...</div>';
+
+        fetch('getAttendanceRecords.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('attendanceRecords').innerHTML = data;
+            calculateAttendanceStats(courseId);
+        })
+        .catch(error => {
+            console.error('Error loading attendance records:', error);
+            document.getElementById('attendanceRecords').innerHTML = '<div class="no-data">Error loading attendance records</div>';
+            showNotification('Error loading attendance records', 'error');
+        });
+    }
+
+    function calculateAttendanceStats(courseId) {
+        const formData = new FormData();
+        formData.append('course_id', courseId);
+
+        fetch('getAttendanceStats.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('attendanceStats').innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error loading attendance stats:', error);
+        });
+    }
+
+    function deleteAttendance(id) {
+        if (!confirm('Are you sure you want to delete this attendance record?')) {
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('id', id);
+        formData.append('action', 'delete');
+
+        fetch('manageAttendance.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showNotification('Attendance record deleted successfully!', 'success');
+                viewAttendanceRecords();
+            } else {
+                showNotification(data.message, 'error');
+            }
+        })
+        .catch(error => {
+            showNotification('Error deleting attendance record', 'error');
+        });
+    }
+
+    // ==================== UTILITY FUNCTIONS ====================
+    function showNotification(message, type = 'info') {
+        // Remove existing notifications
+        const existingNotifications = document.querySelectorAll('.notification');
+        existingNotifications.forEach(notification => notification.remove());
+
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.textContent = message;
+        
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+            max-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        `;
+
+        const colors = {
+            success: '#27ae60',
+            error: '#e74c3c',
+            warning: '#f39c12',
+            info: '#3498db'
+        };
+        
+        notification.style.backgroundColor = colors[type] || colors.info;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 300);
+            }
+        }, 5000);
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        setupAttendanceForm();
+    });
+  </script>
+</body>
+</html>
