@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Portal - Section Grade Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">Uni<span>Portal</span></div>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#" class="active">Grades</a></li>
+                <li><a href="#">Attendance</a></li>
+                <li><a href="#">Feedback</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="topbar">
+                <h1>Grade Submission</h1>
+            </div>
+
+            <!-- Section Selection -->
+            <div class="card">
+                <h2>Select Section</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="courseSelect">Course</label>
+                        <select id="courseSelect" class="form-control">
+                            <option value="">Select a course</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sectionSelect">Section</label>
+                        <select id="sectionSelect" class="form-control" disabled>
+                            <option value="">Select a section</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button id="loadSectionBtn" class="btn-primary" disabled>Load Section</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Section Info -->
+            <div id="sectionInfo" class="card" style="display: none;">
+                <h2 id="currentSectionTitle">Section Details</h2>
+                <div class="section-details">
+                    <div class="detail-item">
+                        <span class="detail-label">Course:</span>
+                        <span id="detailCourse" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Section:</span>
+                        <span id="detailSection" class="detail-value"></span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Students:</span>
+                        <span id="detailStudents" class="detail-value"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grades List -->
+            <div id="gradesSection" class="card" style="display: none;">
+                <div class="section-header">
+                    <h2>Student Grades</h2>
+                    <div class="section-actions">
+                        <button id="saveAllBtn" class="btn-success">Save All Changes</button>
+                        <button id="exportBtn" class="btn-info">Export to CSV</button>
+                    </div>
+                </div>
+                <div id="gradesList" class="grades-list">
+                    <!-- Grades will be displayed here -->
+                </div>
+            </div>
+
+            <!-- Add Student Form -->
+            <div id="addStudentSection" class="card" style="display: none;">
+                <h2>Add Student to Section</h2>
+                <form id="addStudentForm" class="form-row">
+                    <div class="form-group">
+                        <label for="newStudentName">Student Name</label>
+                        <input type="text" id="newStudentName" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newStudentId">Student ID</label>
+                        <input type="text" id="newStudentId" class="form-control" placeholder="Student ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newStudentGrade">Initial Grade</label>
+                        <select id="newStudentGrade" class="form-control">
+                            <option value="A">A</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B">B</option>
+                            <option value="B-">B-</option>
+                            <option value="C+">C+</option>
+                            <option value="C">C</option>
+                            <option value="C-">C-</option>
+                            <option value="D">D</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="newStudentPercentage">Initial Percentage</label>
+                        <input type="number" id="newStudentPercentage" class="form-control" min="0" max="100" step="0.1" value="0" placeholder="Percentage">
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="submit" class="btn-primary">Add Student</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="section_grades.js"></script>
+</body>
+
+</html>
