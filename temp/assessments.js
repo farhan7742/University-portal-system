@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // DOM Elements - Updated to match your HTML
+    // DOM Elements  to match  HTML
     const createAssessmentBtn = document.getElementById('create-assessment');
     const searchBtn = document.getElementById('search-btn');
     const searchInput = document.getElementById('search-assessments');
@@ -542,4 +542,5 @@ function showNotification(message, type) {
             }
         }, 300);
     }, 5000);
+
 }
