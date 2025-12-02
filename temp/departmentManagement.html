@@ -9,47 +9,130 @@
 <body>
   <div class="dashboard">
     <aside class="sidebar">
-      <h2 class="logo">Uni<span>Portal</span></h2>
-      <ul>
-        <li><a href="index.html">Dashboard</a></li>
-        <li><a href="userManagement.html">User Management</a></li>
-        <li><a href="courseManagement.html">Course Management</a></li>
-        <li><a href="departmentManagement.html" class="active">Department Management</a></li>
-        <li><a href="attendanceManagement.html">Attendance Management</a></li>
-        <li><a href="feedback.html">Feedback</a></li>
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">U</div>
+          <div class="logo-text">
+            <span>Uni</span><span>Portal</span>
+            <div class="logo-subtitle">Admin Panel</div>
+          </div>
+        </div>
+        <button class="toggle-sidebar">☰</button>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link active">Dashboard</a></li>
+        <li class="nav-item"><a href="userManagement.html" class="nav-link active">User Management</a></li>
+        <li class="nav-item"><a href="courseManagement.html" class="nav-link active">Course Management</a></li>
+        <li class="nav-item"><a href="departmentManagement.html" class="nav-link active">Department Management</a></li>
+        <li class="nav-item"><a href="attendanceManagement.html" class="nav-link active">Attendance Management</a></li>
+        <li class="nav-item"><a href="feedback.html" class="nav-link active">Submit Feedback</a></li>
+        <li class="nav-item"><a href="courselist.html" class="nav-link active">Course list</a></li>
+        <li class="nav-item"><a href="assessments.html" class="nav-link active">Assessments</a></li>
+        <li class="nav-item"><a href="enrolledCourses.html" class="nav-link active">Enrolled Course</a></li>
+        <li class="nav-item"><a href="grade_submission.html" class="nav-link active">Grade Submission</a></li>
+
       </ul>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar">A</div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Administrator</div>
+          </div>
+        </div>
+      </div>
     </aside>
 
     <main class="main-content">
       <header class="topbar">
-        <h1>Department Management</h1>
+        <div class="page-title">
+          <h1>Department Management</h1>
+          <div class="page-subtitle">Manage academic departments</div>
+        </div>
+        <div class="topbar-actions">
+          <button class="notification-btn">🔔<span class="notification-badge">3</span></button>
+        </div>
       </header>
 
       <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-icon">🏛️</span>
+            Department Management
+          </h2>
+          <div class="card-actions">
+            <button class="btn-primary" onclick="exportDepartments()">Export</button>
+          </div>
+        </div>
+
+        <!-- Search Section -->
         <div class="search-section">
-          <input type="text" id="searchTermDepartment" placeholder="Search departments..." oninput="searchDepartments()">
-          <button class="search-btn" onclick="searchDepartments()">Search</button>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="searchTermDepartment" class="form-control" 
+                     placeholder="Search departments..." oninput="searchDepartments()">
+            </div>
+            <button class="btn-primary" onclick="searchDepartments()">Search</button>
+            <button class="btn-secondary" onclick="resetDepartmentSearch()">Reset</button>
+          </div>
         </div>
 
         <!-- Add Department Form -->
-        <form method="POST" id="addDepartmentForm">
-          <div class="form">
-            <input type="text" name="dept_name" id="dept_name" placeholder="Enter Department Name" required>
-            <input type="text" name="dept_code" id="dept_code" placeholder="Enter Department Code" required>
-            <input type="text" name="program_name" id="program_name" placeholder="Enter Program Name">
-            <input type="text" name="faculty" id="faculty" placeholder="Enter Faculty Name">
-            <input type="number" name="year" id="year" placeholder="Enter Academic Year" min="2000" max="2030">
-
-            <button class="btn-primary" type="submit">Add Department</button>
+        <form method="POST" id="addDepartmentForm" class="form-section">
+          <h3>Add New Department</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dept_name" class="form-label">Department Name</label>
+              <input type="text" name="dept_name" id="dept_name" class="form-control" 
+                     placeholder="Enter department name" required>
+            </div>
+            <div class="form-group">
+              <label for="dept_code" class="form-label">Department Code</label>
+              <input type="text" name="dept_code" id="dept_code" class="form-control" 
+                     placeholder="Enter department code" required>
+            </div>
           </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="program_name" class="form-label">Program Name</label>
+              <input type="text" name="program_name" id="program_name" class="form-control" 
+                     placeholder="Enter program name">
+            </div>
+            <div class="form-group">
+              <label for="faculty" class="form-label">Faculty Name</label>
+              <input type="text" name="faculty" id="faculty" class="form-control" 
+                     placeholder="Enter faculty name">
+            </div>
+            <div class="form-group">
+              <label for="year" class="form-label">Academic Year</label>
+              <input type="number" name="year" id="year" class="form-control" 
+                     placeholder="Enter academic year" min="2000" max="2030">
+            </div>
+          </div>
+          <button type="submit" class="btn-success">Add Department</button>
         </form>
 
-        <div class="list-caption">Departments List</div>
-        <ul id="departmentList"></ul>
+        <!-- Departments List -->
+        <div class="section-header">
+          <h3 class="card-title">
+            <span class="card-icon">📋</span>
+            Departments List
+          </h3>
+          <div class="section-actions">
+            <span id="deptCount" class="badge">0 departments</span>
+          </div>
+        </div>
+
+        <div id="departmentList" class="no-data">Loading departments...</div>
       </div>
     </main>
   </div>
 
   <script src="script.js"></script>
+  <script>
+    document.querySelector('.toggle-sidebar').addEventListener('click', function() {
+      document.querySelector('.sidebar').classList.toggle('collapsed');
+    });
+  </script>
 </body>
 </html>
