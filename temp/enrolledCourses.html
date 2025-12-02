@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Enrolled Courses - University Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Enrolled courses specific styles */
+        .courses-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .courses-table th, .courses-table td {
+            padding: var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+
+        .courses-table th {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .courses-table tr:hover {
+            background: rgba(0, 191, 166, 0.05);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+
+        .no-courses {
+            text-align: center;
+            padding: var(--spacing-xxl);
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .no-courses p {
+            margin-bottom: var(--spacing-lg);
+            color: var(--dark-gray);
+        }
+
+        .browse-courses-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .courses-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: var(--spacing-xs);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+
+                <div class="logo">
+                    <div class="logo-icon">U</div>
+                    <div class="logo-text">
+                        Uni<span>Portal</span>
+                        <span class="logo-subtitle">Faculty Dashboard</span>
+                    </div>
+                </div>
+                <button class="toggle-sidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <ul class="nav-menu">
+
+               <li class="nav-item">
+                    <a href="index.html" class="nav-link active">
+                        <i class="nav-icon fas nav-icon"></i>
+                        <span class="nav-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="announcements.html" class="nav-link active">
+                        <i class="nav-icon fas fa-bullhorn"></i>
+                        <span class="nav-text">Announcements</span>
+                    </a>
+                </li>
+                  
+                  <li class="nav-item">
+                    <a href="courselist.html" class="nav-link active">
+                        <i class="nav-icon fas nav-icon"></i>
+                        <span class="nav-text">Courselist</span>
+                    </a>
+                </li>
+                   <li class="nav-item">
+                    <a href="enrolledCourses.html" class="nav-link active">
+                        <i class="nav-icon fas nav-icon"></i>
+                        <span class="nav-text">My Courses</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="assessments.html" class="nav-link active">
+                        <i class="nav-icon fas nav-icon"></i>
+                        <span class="nav-text">Assessments</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="grade_submission.html" class="nav-link active">
+                        <i class="nav-icon fas nav-icon"></i>
+                        <span class="nav-text">Grades</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="userManagement.html" class="nav-link active">
+                        <i class="nav-icon fas nav-icon"></i>
+                        <span class="nav-text">Users</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="courseManagement.html" class="nav-link active">
+                        <i class="nav-icon fas nav-icon"></i>
+                        <span class="nav-text">Course Management</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="departmentManagement.html" class="nav-link active">
+                        <i class="fas fas nav-icon"></i>
+                        <span class="nav-text">Departments</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="attendanceManagement.html" class="nav-link active">
+                        <i class="fas fas nav-icon"></i>
+                        <span class="nav-text">Attendance</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="feedback.html" class="nav-link active">
+                        <i class="fas fas nav-icon"></i>
+                        <span class="nav-text">Feedback</span>
+                    </a>
+                </li>
+
+                
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="avatar">F</div>
+                    <div class="user-info">
+                        <div class="user-name">Faculty</div>
+                        <div class="user-role">Faculty</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="topbar">
+                <div class="page-title">
+                    <i class="fas fa-user-graduate"></i>
+                    My Enrolled Courses - Fall 2024
+                    <span class="page-subtitle">View and manage your courses</span>
+                </div>
+                <div class="topbar-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">2</span>
+                    </button>
+                    <div class="user-info d-flex align-center">
+                        <div class="avatar mr-2">S</div>
+                        <div>Welcome, Faculty</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="enrolledCourses">
+                <!-- Enrolled courses will be dynamically inserted here -->
+                <div class="no-courses">
+                    <p>You are not enrolled in any courses for this semester.</p>
+                    <a href="courselist.html" class="btn btn-primary browse-courses-btn">
+                        <i class="fas fa-search mr-1"></i> Browse Available Courses
+                    </a>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+
+    <script>
+    // API endpoint for enrolled courses
+    const ENROLLED_COURSES_API = 'enrolled_courses.php';
+    
+    // DOM Elements
+    const toggleSidebar = document.querySelector('.toggle-sidebar');
+    const sidebar = document.querySelector('.sidebar');
+    const enrolledCoursesContainer = document.getElementById('enrolledCourses');
+    
+    // Global variables
+    let enrolledCourses = [];
+    
+    // Toggle sidebar
+    toggleSidebar.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+    });
+    
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', () => {
+        loadEnrolledCourses();
+    });
+    
+    // Load enrolled courses from API
+    async function loadEnrolledCourses() {
+        showLoading();
+        
+        try {
+            const response = await fetch(ENROLLED_COURSES_API);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            
+            if (result.success && result.data) {
+                enrolledCourses = result.data;
+                displayEnrolledCourses(enrolledCourses);
+            } else {
+                showNoCourses();
+                console.error('Failed to load enrolled courses:', result.message);
+            }
+        } catch (error) {
+            console.error('Error loading enrolled courses:', error);
+            showNoCourses();
+            showMessage('Failed to load enrolled courses. Please try again.', 'error');
+        }
+    }
+    
+    // Display enrolled courses
+    function displayEnrolledCourses(courses) {
+        if (courses.length === 0) {
+            showNoCourses();
+            return;
+        }
+        
+        enrolledCoursesContainer.innerHTML = `
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-list card-icon"></i>
+                        My Enrolled Courses (${courses.length})
+                    </h3>
+                    <div class="search-section">
+                        <input type="text" id="search-courses" class="form-control" placeholder="Search enrolled courses...">
+                        <button id="refresh-courses" class="btn btn-outline" title="Refresh">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="courses-container">
+                        <table class="courses-table">
+                            <thead>
+                                <tr>
+                                    <th>Course Code</th>
+                                    <th>Course Name</th>
+                                    <th>Section</th>
+                                    <th>Schedule</th>
+                                    <th>Term</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="courses-table-body">
+                                ${courses.map(course => createCourseRow(course)).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Add event listeners
+        setupCourseTableListeners();
+    }
+    
+    // Create course table row
+    function createCourseRow(course) {
+        return `
+            <tr data-id="${course.id}">
+                <td>
+                    <strong>${course.course_code || 'N/A'}</strong>
+                </td>
+                <td>
+                    <div class="course-info">
+                        <div class="course-name">${course.course_name || 'Unnamed Course'}</div>
+                        <div class="course-meta">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar-alt"></i> Enrolled on: ${formatDate(course.enrollment_date)}
+                            </small>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <span class="badge badge-info section-badge">Section ${course.section || 'N/A'}</span>
+                </td>
+                <td>
+                    <div class="schedule">
+                        <i class="fas fa-clock"></i>
+                        ${course.schedule || 'Not scheduled'}
+                    </div>
+                </td>
+                <td>
+                    <div class="term-info">
+                        <span class="term-name">${course.term_name || 'Fall 2024'}</span>
+                        <br>
+                        <small class="text-muted">${course.term_code || 'FALL2024'}</small>
+                    </div>
+                </td>
+                <td>
+                    <div class="action-buttons">
+                        <button class="btn btn-sm btn-outline" onclick="changeSection(${course.id}, ${course.section || 1})">
+                            <i class="fas fa-exchange-alt mr-1"></i> Change Section
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="dropCourse(${course.id}, '${course.course_code}')">
+                            <i class="fas fa-trash mr-1"></i> Drop Course
+                        </button>
+                        <button class="btn btn-sm btn-info" onclick="viewCourseDetails(${course.id})">
+                            <i class="fas fa-eye mr-1"></i> View
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+    
+    // Setup event listeners for course table
+    function setupCourseTableListeners() {
+        // Search functionality
+        const searchInput = document.getElementById('search-courses');
+        const refreshBtn = document.getElementById('refresh-courses');
+        
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                filterCourses(searchInput.value);
+            });
+        }
+        
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', loadEnrolledCourses);
+        }
+    }
+    
+    // Filter courses based on search term
+    function filterCourses(searchTerm) {
+        const tableBody = document.getElementById('courses-table-body');
+        if (!tableBody) return;
+        
+        const rows = tableBody.querySelectorAll('tr');
+        const term = searchTerm.toLowerCase();
+        
+        rows.forEach(row => {
+            const courseCode = row.cells[0].textContent.toLowerCase();
+            const courseName = row.cells[1].textContent.toLowerCase();
+            
+            if (courseCode.includes(term) || courseName.includes(term)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+    
+    // Change section for a course
+    async function changeSection(enrollmentId, currentSection) {
+        const newSection = prompt(`Enter new section number (1-5)\nCurrent section: ${currentSection}`, currentSection);
+        
+        if (!newSection || isNaN(newSection) || newSection < 1 || newSection > 5) {
+            showMessage('Please enter a valid section number between 1 and 5', 'error');
+            return;
+        }
+        
+        if (parseInt(newSection) === parseInt(currentSection)) {
+            showMessage('Section number is the same as current section', 'warning');
+            return;
+        }
+        
+        try {
+            showLoading();
+            
+            const response = await fetch(ENROLLED_COURSES_API, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    enrollment_id: enrollmentId,
+                    section: parseInt(newSection)
+                })
+            });
+            
+            const result = await response.json();
+            
+            hideLoading();
+            
+            if (result.success) {
+                showMessage('Section changed successfully!', 'success');
+                
+                // Update the local array
+                const courseIndex = enrolledCourses.findIndex(c => c.id == enrollmentId);
+                if (courseIndex !== -1) {
+                    enrolledCourses[courseIndex].section = newSection;
+                    // Update schedule based on new section
+                    enrolledCourses[courseIndex].schedule = generateRandomSchedule();
+                }
+                
+                // Reload the courses
+                loadEnrolledCourses();
+            } else {
+                showMessage(result.message || 'Failed to change section', 'error');
+            }
+        } catch (error) {
+            console.error('Error changing section:', error);
+            hideLoading();
+            showMessage('Failed to change section', 'error');
+        }
+    }
+    
+    // Drop a course
+    async function dropCourse(enrollmentId, courseCode) {
+        if (!confirm(`Are you sure you want to drop ${courseCode}? This action cannot be undone.`)) {
+            return;
+        }
+        
+        try {
+            showLoading();
+            
+            const response = await fetch(ENROLLED_COURSES_API, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ enrollment_id: enrollmentId })
+            });
+            
+            const result = await response.json();
+            
+            hideLoading();
+            
+            if (result.success) {
+                showMessage('Course dropped successfully!', 'success');
+                
+                // Remove from local array
+                enrolledCourses = enrolledCourses.filter(c => c.id != enrollmentId);
+                
+                // Reload the display
+                if (enrolledCourses.length === 0) {
+                    showNoCourses();
+                } else {
+                    displayEnrolledCourses(enrolledCourses);
+                }
+            } else {
+                showMessage(result.message || 'Failed to drop course', 'error');
+            }
+        } catch (error) {
+            console.error('Error dropping course:', error);
+            hideLoading();
+            showMessage('Failed to drop course', 'error');
+        }
+    }
+    
+    // View course details
+    async function viewCourseDetails(enrollmentId) {
+        const course = enrolledCourses.find(c => c.id == enrollmentId);
+        
+        if (!course) {
+            showMessage('Course not found', 'error');
+            return;
+        }
+        
+        // Create modal for course details
+        const modalHTML = `
+            <div class="modal-overlay" id="course-modal" style="display: flex;">
+                <div class="modal" style="max-width: 700px;">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-book card-icon"></i>
+                            ${course.course_name}
+                            <span class="badge badge-success" style="margin-left: 10px;">Enrolled</span>
+                        </h3>
+                        <button class="close" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="detail-card">
+                                    <div class="detail-label"><i class="fas fa-hashtag"></i> Course Code</div>
+                                    <div class="detail-value">${course.course_code}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-card">
+                                    <div class="detail-label"><i class="fas fa-calendar-alt"></i> Term</div>
+                                    <div class="detail-value">${course.term_name} (${course.term_code})</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="detail-card">
+                                    <div class="detail-label"><i class="fas fa-users"></i> Section</div>
+                                    <div class="detail-value">
+                                        <span class="badge badge-info">Section ${course.section}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-card">
+                                    <div class="detail-label"><i class="fas fa-clock"></i> Schedule</div>
+                                    <div class="detail-value">${course.schedule}</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-card mb-4">
+                            <div class="detail-label"><i class="fas fa-info-circle"></i> Enrollment Information</div>
+                            <div class="detail-value">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <small>Enrollment ID: ${course.id}</small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small>Student ID: ${course.student_id}</small>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        <small>Enrolled on: ${formatDate(course.enrollment_date)}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-actions mt-4 text-right">
+                            <button class="btn btn-secondary mr-2" onclick="closeModal()">
+                                <i class="fas fa-times mr-1"></i> Close
+                            </button>
+                            <button class="btn btn-warning mr-2" onclick="changeSection(${course.id}, ${course.section}); closeModal();">
+                                <i class="fas fa-exchange-alt mr-1"></i> Change Section
+                            </button>
+                            <button class="btn btn-danger" onclick="dropCourse(${course.id}, '${course.course_code}'); closeModal();">
+                                <i class="fas fa-trash mr-1"></i> Drop Course
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Remove existing modal if any
+        const existingModal = document.getElementById('course-modal');
+        if (existingModal) {
+            existingModal.remove();
+        }
+        
+        // Add modal to body
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        
+        // Add CSS for modal if not already present
+        addModalStyles();
+    }
+    
+    // Show no courses message
+    function showNoCourses() {
+        enrolledCoursesContainer.innerHTML = `
+            <div class="no-courses">
+                <div class="empty-state">
+                    <i class="fas fa-book-open fa-4x text-muted mb-4"></i>
+                    <h3 class="mb-3">No Enrolled Courses</h3>
+                    <p class="text-muted mb-4">You haven't enrolled in any courses for this semester yet.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="courselist.html" class="btn btn-primary browse-courses-btn">
+                            <i class="fas fa-search mr-2"></i> Browse Available Courses
+                        </a>
+                        <button class="btn btn-outline" onclick="loadEnrolledCourses()">
+                            <i class="fas fa-sync-alt mr-2"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Show loading state
+    function showLoading() {
+        enrolledCoursesContainer.innerHTML = `
+            <div class="loading-state text-center py-5">
+                <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="text-muted">Loading your enrolled courses...</p>
+            </div>
+        `;
+    }
+    
+    // Hide loading state
+    function hideLoading() {
+        // Loading state will be replaced by actual content
+    }
+    
+    // Close modal
+    function closeModal() {
+        const modal = document.getElementById('course-modal');
+        if (modal) {
+            modal.remove();
+        }
+    }
+    
+    // Format date
+    function formatDate(dateString) {
+        if (!dateString) return 'N/A';
+        
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return 'Invalid date';
+        
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
+    }
+    
+    // Generate random schedule (matching PHP function)
+    function generateRandomSchedule() {
+        const days = ['Mon/Wed', 'Tue/Thu', 'Mon/Wed/Fri'];
+        const times = ['9:00-10:30 AM', '10:00-11:30 AM', '1:00-2:30 PM', '2:00-3:30 PM'];
+        const randomDay = days[Math.floor(Math.random() * days.length)];
+        const randomTime = times[Math.floor(Math.random() * times.length)];
+        return randomDay + ' ' + randomTime;
+    }
+    
+    // Show message to user
+    function showMessage(message, type = 'info') {
+        // Remove existing message
+        const existingMessage = document.querySelector('.user-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+        
+        // Create message element
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `user-message message-${type}`;
+        messageDiv.innerHTML = `
+            <span>${message}</span>
+            <button class="close-message">&times;</button>
+        `;
+        
+        // Style the message
+        const bgColor = type === 'success' ? '#10b981' : 
+                       type === 'error' ? '#ef4444' : 
+                       type === 'warning' ? '#f59e0b' : '#3b82f6';
+        
+        messageDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${bgColor};
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            min-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            animation: slideIn 0.3s ease-out;
+        `;
+        
+        // Add close button functionality
+        messageDiv.querySelector('.close-message').addEventListener('click', () => {
+            messageDiv.style.animation = 'slideOut 0.3s ease-out';
+            setTimeout(() => messageDiv.remove(), 300);
+        });
+        
+        // Add to body
+        document.body.appendChild(messageDiv);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (messageDiv.parentNode) {
+                messageDiv.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => messageDiv.remove(), 300);
+            }
+        }, 5000);
+        
+        // Add CSS for animations if not already present
+        if (!document.querySelector('#message-animations')) {
+            const style = document.createElement('style');
+            style.id = 'message-animations';
+            style.textContent = `
+                @keyframes slideIn {
+                    from {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                    to {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                }
+                
+                @keyframes slideOut {
+                    from {
+                        transform: translateX(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: translateX(100%);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+    
+    // Add CSS for modal and other elements
+    function addModalStyles() {
+        if (!document.querySelector('#enrolled-courses-styles')) {
+            const style = document.createElement('style');
+            style.id = 'enrolled-courses-styles';
+            style.textContent = `
+                .modal-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 1000;
+                }
+                
+                .modal {
+                    background: white;
+                    border-radius: 12px;
+                    width: 90%;
+                    max-width: 700px;
+                    max-height: 80vh;
+                    overflow-y: auto;
+                    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                }
+                
+                .modal .card-header {
+                    padding: 20px 24px;
+                    border-bottom: 1px solid #e5e7eb;
+                }
+                
+                .modal-body {
+                    padding: 24px;
+                }
+                
+                .detail-card {
+                    background: #f9fafb;
+                    border-radius: 8px;
+                    padding: 16px;
+                    margin-bottom: 12px;
+                }
+                
+                .detail-label {
+                    font-weight: 600;
+                    color: #6b7280;
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    margin-bottom: 4px;
+                }
+                
+                .detail-value {
+                    color: #111827;
+                    font-size: 16px;
+                }
+                
+                .badge {
+                    display: inline-block;
+                    padding: 4px 12px;
+                    border-radius: 20px;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+                
+                .badge-info {
+                    background: #dbeafe;
+                    color: #1d4ed8;
+                }
+                
+                .badge-success {
+                    background: #dcfce7;
+                    color: #166534;
+                }
+                
+                .badge-warning {
+                    background: #fef3c7;
+                    color: #92400e;
+                }
+                
+                .badge-danger {
+                    background: #fee2e2;
+                    color: #991b1b;
+                }
+                
+                .loading-state {
+                    background: white;
+                    border-radius: 12px;
+                    padding: 40px;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                }
+                
+                .spinner-border {
+                    width: 3rem;
+                    height: 3rem;
+                }
+                
+                .empty-state {
+                    background: white;
+                    border-radius: 12px;
+                    padding: 60px 40px;
+                    text-align: center;
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                }
+                
+                .course-info {
+                    display: flex;
+                    flex-direction: column;
+                }
+                
+                .course-name {
+                    font-weight: 600;
+                    margin-bottom: 4px;
+                }
+                
+                .course-meta {
+                    font-size: 12px;
+                }
+                
+                .text-muted {
+                    color: #6b7280 !important;
+                }
+                
+                .schedule {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                }
+                
+                .term-info {
+                    display: flex;
+                    flex-direction: column;
+                }
+                
+                .action-buttons {
+                    display: flex;
+                    gap: 8px;
+                }
+                
+                .action-buttons .btn-sm {
+                    padding: 4px 12px;
+                    font-size: 12px;
+                }
+                
+                .search-section {
+                    display: flex;
+                    gap: 10px;
+                }
+                
+                @media (max-width: 768px) {
+                    .action-buttons {
+                        flex-direction: column;
+                    }
+                    
+                    .courses-table {
+                        font-size: 14px;
+                    }
+                    
+                    .courses-table th,
+                    .courses-table td {
+                        padding: 12px 8px;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    }
+    
+    // Initialize styles
+    addModalStyles();
+</script>
+</body>
+</html>
