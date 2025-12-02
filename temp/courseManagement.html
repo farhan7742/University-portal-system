@@ -9,45 +9,125 @@
 <body>
   <div class="dashboard">
     <aside class="sidebar">
-      <h2 class="logo">Uni<span>Portal</span></h2>
-      <ul>
-        <li><a href="index.html">Dashboard</a></li>
-        <li><a href="userManagement.html">User Management</a></li>
-        <li><a href="courseManagement.html" class="active">Course Management</a></li>
-        <li><a href="departmentManagement.html">Department Management</a></li>
-        <li><a href="attendanceManagement.html">Attendance Management</a></li>
-        <li><a href="feedback.html">Feedback</a></li>
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">U</div>
+          <div class="logo-text">
+            <span>Uni</span><span>Portal</span>
+            <div class="logo-subtitle">Admin Panel</div>
+          </div>
+        </div>
+        <button class="toggle-sidebar">☰</button>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link active">Dashboard</a></li>
+        <li class="nav-item"><a href="userManagement.html" class="nav-link active">User Management</a></li>
+        <li class="nav-item"><a href="courseManagement.html" class="nav-link active">Course Management</a></li>
+        <li class="nav-item"><a href="departmentManagement.html" class="nav-link active">Department Management</a></li>
+        <li class="nav-item"><a href="attendanceManagement.html" class="nav-link active">Attendance Management</a></li>
+        <li class="nav-item"><a href="feedback.html" class="nav-link active">Submit Feedback</a></li>
+        <li class="nav-item"><a href="courselist.html" class="nav-link active">Course list</a></li>
+        <li class="nav-item"><a href="assessments.html" class="nav-link active">Assessments</a></li>
+        <li class="nav-item"><a href="enrolledCourses.html" class="nav-link active">Enrolled Course</a></li>
+        <li class="nav-item"><a href="grade_submission.html" class="nav-link active">Grade Submission</a></li>
+
       </ul>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar">A</div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Administrator</div>
+          </div>
+        </div>
+      </div>
     </aside>
 
     <main class="main-content">
       <header class="topbar">
-        <h1>Course Management</h1>
+        <div class="page-title">
+          <h1>Course Management</h1>
+          <div class="page-subtitle">Manage academic courses</div>
+        </div>
+        <div class="topbar-actions">
+          <button class="notification-btn">🔔<span class="notification-badge">3</span></button>
+        </div>
       </header>
 
       <div class="card">
-        <div class="search-section">
-          <input type="text" id="searchTermCourse" placeholder="Search courses..." oninput="searchCourses()">
-          <button class="search-btn" onclick="searchCourses()">Search</button>
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-icon">📚</span>
+            Course Management
+          </h2>
+          <div class="card-actions">
+            <button class="btn-primary" onclick="exportCourses()">Export</button>
+          </div>
         </div>
 
-        <form method="POST" id="addCourseForm">
-          <div class="form">
-            <input type="text" name="course_name" id="course_name" placeholder="Enter Course Name" required>
-            <input type="text" name="course_code" id="course_code" placeholder="Enter Course Code" required>
-            <input type="text" name="term_name" id="term_name" placeholder="Enter Term Name" required>
-            <input type="text" name="term_code" id="term_code" placeholder="Enter Term Code" required>
-
-            <button class="btn-primary" type="submit">Add Course</button>
+        <!-- Search Section -->
+        <div class="search-section">
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="searchTermCourse" class="form-control" 
+                     placeholder="Search courses..." oninput="searchCourses()">
+            </div>
+            <button class="btn-primary" onclick="searchCourses()">Search</button>
+            <button class="btn-secondary" onclick="resetCourseSearch()">Reset</button>
           </div>
+        </div>
+
+        <!-- Add Course Form -->
+        <form method="POST" id="addCourseForm" class="form-section">
+          <h3>Add New Course</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="course_name" class="form-label">Course Name</label>
+              <input type="text" name="course_name" id="course_name" class="form-control" 
+                     placeholder="Enter course name" required>
+            </div>
+            <div class="form-group">
+              <label for="course_code" class="form-label">Course Code</label>
+              <input type="text" name="course_code" id="course_code" class="form-control" 
+                     placeholder="Enter course code" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="term_name" class="form-label">Term Name</label>
+              <input type="text" name="term_name" id="term_name" class="form-control" 
+                     placeholder="Enter term name" required>
+            </div>
+            <div class="form-group">
+              <label for="term_code" class="form-label">Term Code</label>
+              <input type="text" name="term_code" id="term_code" class="form-control" 
+                     placeholder="Enter term code" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-success">Add Course</button>
         </form>
 
-        <div class="list-caption">Courses List</div>
-        <ul id="courseList"></ul>
+        <!-- Courses List -->
+        <div class="section-header">
+          <h3 class="card-title">
+            <span class="card-icon">📋</span>
+            Courses List
+          </h3>
+          <div class="section-actions">
+            <span id="courseCount" class="badge">0 courses</span>
+          </div>
+        </div>
+
+        <div id="courseList" class="no-data">Loading courses...</div>
       </div>
     </main>
   </div>
 
   <script src="script.js"></script>
+  <script>
+    document.querySelector('.toggle-sidebar').addEventListener('click', function() {
+      document.querySelector('.sidebar').classList.toggle('collapsed');
+    });
+  </script>
 </body>
 </html>
