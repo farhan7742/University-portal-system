@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniPortal - System Status</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .status-header {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .overall-status {
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 25px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .status-operational {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .status-degraded {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .status-outage {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        
+        .last-updated {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-status {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .status-up {
+            background: #10b981;
+        }
+        
+        .status-degraded {
+            background: #f59e0b;
+        }
+        
+        .status-down {
+            background: #ef4444;
+        }
+        
+        .service-name {
+            font-weight: 600;
+            margin: 15px 0 10px 0;
+        }
+        
+        .incidents-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .incident-item {
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        
+        .incident-resolved {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+        
+        .incident-investigating {
+            border-left-color: #f59e0b;
+            background: #fffbeb;
+        }
+        
+        .incident-identified {
+            border-left-color: #3b82f6;
+            background: #eff6ff;
+        }
+        
+        .incident-updates {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eaeaea;
+        }
+        
+        .update-item {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        .update-time {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            margin-left: 10px;
+        }
+        
+        .subscribe-section {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .subscribe-section h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .subscribe-input {
+            display: flex;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        
+        .subscribe-input input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            font-size: 16px;
+        }
+        
+        .subscribe-input button {
+            background: white;
+            color: #7c3aed;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bubble Animation Background -->
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="dashboard">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 class="logo">Uni<span>Portal</span></h2>
+            </div>
+            
+            <div class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="userManagement.html"><i class="fas fa-users"></i> User Management</a></li>
+                    <li><a href="courseManagement.html"><i class="fas fa-book"></i> Course Management</a></li>
+                    <li><a href="departmentManagement.html"><i class="fas fa-building"></i> Department Management</a></li>
+                    <li><a href="attendanceManagement.html"><i class="fas fa-calendar-check"></i> Attendance Management</a></li>
+                    <li><a href="feedback.html"><i class="fas fa-comment"></i> Feedback</a></li>
+                    <li><a href="noticeboard.html"><i class="fas fa-bullhorn"></i> Noticeboard</a></li>
+                    <li><a href="courselist.html"><i class="fas fa-list"></i> Course List</a></li>
+                    <li><a href="enrolledCourses.html"><i class="fas fa-graduation-cap"></i> Enrolled Courses</a></li>
+                    <li><a href="view_feedback.html"><i class="fas fa-chart-bar"></i> View feedback</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar-small">F</div>
+                    <div class="user-details">
+                        <div class="user-name">Welcome Faculty</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <h1>System Status</h1>
+                <div class="user-info">
+                    <span>Welcome, Faculty</span>
+                    <div class="user-avatar">F</div>
+                </div>
+            </header>
+
+            <!-- Quick Navigation Menu -->
+            <div class="quick-nav">
+                <a href="index.html" data-tooltip="Dashboard"><i class="fas fa-home"></i></a>
+                <a href="helpCenter.html" data-tooltip="Help Center"><i class="fas fa-question-circle"></i></a>
+                <a href="documentation.html" data-tooltip="Documentation"><i class="fas fa-file-alt"></i></a>
+                <a href="systemStatus.html" data-tooltip="System Status" class="active"><i class="fas fa-server"></i></a>
+                <a href="contactSupport.html" data-tooltip="Contact Support"><i class="fas fa-headset"></i></a>
+            </div>
+
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1>System Status</h1>
+                <p>Real-time status of UniPortal services and incident reports</p>
+            </section>
+
+            <!-- Overall Status -->
+            <div class="status-header">
+                <div class="overall-status status-operational">
+                    <i class="fas fa-check-circle"></i> All Systems Operational
+                </div>
+                <h2>UniPortal Services are running normally</h2>
+                <p class="last-updated">Last updated: Today, 10:45 AM UTC</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-status status-up"></div>
+                    <div class="service-name">Authentication Service</div>
+                    <p>User login and authentication</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-status status-up"></div>
+                    <div class="service-name">Course Management</div>
+                    <p>Course enrollment and materials</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-status status-up"></div>
+                    <div class="service-name">Database Services</div>
+                    <p>Primary data storage and retrieval</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-status status-up"></div>
+                    <div class="service-name">File Storage</div>
+                    <p>Assignment submissions and files</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-status status-up"></div>
+                    <div class="service-name">Email Services</div>
+                    <p>Notifications and communications</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-status status-up"></div>
+                    <div class="service-name">API Services</div>
+                    <p>Third-party integrations</p>
+                </div>
+            </div>
+
+            <!-- Incidents History -->
+            <section class="incidents-section">
+                <h2>Recent Incidents</h2>
+                
+                <div class="incident-item incident-resolved">
+                    <h3><i class="fas fa-check-circle" style="color: #10b981;"></i> Database Performance Issues - RESOLVED</h3>
+                    <p><strong>Date:</strong> October 10, 2024</p>
+                    <p><strong>Impact:</strong> Slow response times for course materials</p>
+                    
+                    <div class="incident-updates">
+                        <div class="update-item">
+                            <strong>Update 3 (Oct 10, 18:30 UTC):</strong> Issue resolved. Database performance restored to normal levels.
+                            <span class="update-time">2 days ago</span>
+                        </div>
+                        <div class="update-item">
+                            <strong>Update 2 (Oct 10, 16:15 UTC):</strong> Identified the root cause as a query optimization issue. Implementing fix.
+                            <span class="update-time">2 days ago</span>
+                        </div>
+                        <div class="update-item">
+                            <strong>Update 1 (Oct 10, 14:00 UTC):</strong> Investigating reports of slow database response times.
+                            <span class="update-time">2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="incident-item incident-resolved">
+                    <h3><i class="fas fa-check-circle" style="color: #10b981;"></i> Email Service Interruption - RESOLVED</h3>
+                    <p><strong>Date:</strong> October 5, 2024</p>
+                    <p><strong>Impact:</strong> Delay in notification emails</p>
+                    
+                    <div class="incident-updates">
+                        <div class="update-item">
+                            <strong>Update 2 (Oct 5, 22:00 UTC):</strong> Email service fully restored. Queue cleared.
+                            <span class="update-time">7 days ago</span>
+                        </div>
+                        <div class="update-item">
+                            <strong>Update 1 (Oct 5, 20:30 UTC):</strong> Identified issue with email queue processing. Working on resolution.
+                            <span class="update-time">7 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Subscribe for Updates -->
+            <section class="subscribe-section">
+                <h3>Stay Informed</h3>
+                <p>Subscribe to receive status updates and incident notifications via email</p>
+                
+                <div class="subscribe-input">
+                    <input type="email" placeholder="Enter your email address">
+                    <button type="button">Subscribe</button>
+                </div>
+                
+                <p style="font-size: 0.9rem; opacity: 0.9;">You can unsubscribe at any time. We respect your privacy.</p>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>UniPortal</h3>
+                        <p>Comprehensive University Management System for modern educational institutions.</p>
+                        <div class="social-links">
+                            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <p><a href="index.html">Dashboard</a></p>
+                        <p><a href="userManagement.html">User Management</a></p>
+                        <p><a href="courseManagement.html">Course Management</a></p>
+                        <p><a href="departmentManagement.html">Department Management</a></p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <p><i class="fas fa-envelope"></i> farhansadik91683@UniPortal.edu</p>
+                        <p><i class="fas fa-phone"></i> +08801581173911</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Sh-46, Road-06, Dhanmondi, Dhaka-1209</p>
+                        <p><a href="feedback.html"><i class="fas fa-comment"></i> Send Feedback</a></p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Support</h3>
+                        <p><a href="helpCenter.html"><i class="fas fa-question-circle"></i> Help Center</a></p>
+                        <p><a href="documentation.html"><i class="fas fa-file-alt"></i> Documentation</a></p>
+                        <p><a href="systemStatus.html" class="active"><i class="fas fa-server"></i> System Status</a></p>
+                        <p><a href="contactSupport.html"><i class="fas fa-headset"></i> Contact Support</a></p>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>&copy; 2024 UniPortal University Management System. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="index.js"></script>
+    <script>
+        // Auto-refresh status every 60 seconds
+        setInterval(function() {
+            const lastUpdated = document.querySelector('.last-updated');
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            lastUpdated.textContent = `Last updated: Today, ${timeString} UTC`;
+        }, 60000);
+        
+        // Subscribe functionality
+        document.querySelector('.subscribe-input button').addEventListener('click', function() {
+            const email = document.querySelector('.subscribe-input input').value;
+            if (email && email.includes('@')) {
+                alert('Thank you for subscribing to status updates!');
+                document.querySelector('.subscribe-input input').value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
+    </script>
+</body>
+</html>

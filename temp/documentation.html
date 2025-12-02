@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniPortal - Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        .doc-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .doc-category-btn {
+            padding: 10px 20px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .doc-category-btn.active {
+            background: #4f46e5;
+            color: white;
+        }
+        
+        .doc-category-btn:hover:not(.active) {
+            background: #e2e8f0;
+        }
+        
+        .doc-section {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .doc-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .doc-item {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .doc-item:last-child {
+            border-bottom: none;
+        }
+        
+        .doc-item h3 {
+            color: #4f46e5;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .doc-item p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .doc-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .doc-link:hover {
+            text-decoration: underline;
+        }
+        
+        .doc-search {
+            margin-bottom: 30px;
+        }
+        
+        .search-box {
+            position: relative;
+            max-width: 600px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #4f46e5;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Bubble Animation Background -->
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+
+    <!-- Sidebar Toggle Button -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="dashboard">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 class="logo">Uni<span>Portal</span></h2>
+            </div>
+            
+            <div class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="userManagement.html"><i class="fas fa-users"></i> User Management</a></li>
+                    <li><a href="courseManagement.html"><i class="fas fa-book"></i> Course Management</a></li>
+                    <li><a href="departmentManagement.html"><i class="fas fa-building"></i> Department Management</a></li>
+                    <li><a href="attendanceManagement.html"><i class="fas fa-calendar-check"></i> Attendance Management</a></li>
+                    <li><a href="feedback.html"><i class="fas fa-comment"></i> Feedback</a></li>
+                    <li><a href="noticeboard.html"><i class="fas fa-bullhorn"></i> Noticeboard</a></li>
+                    <li><a href="courselist.html"><i class="fas fa-list"></i> Course List</a></li>
+                    <li><a href="enrolledCourses.html"><i class="fas fa-graduation-cap"></i> Enrolled Courses</a></li>
+                    <li><a href="view_feedback.html"><i class="fas fa-chart-bar"></i> View feedback</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar-small">F</div>
+                    <div class="user-details">
+                        <div class="user-name">Welcome Faculty</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <h1>Documentation</h1>
+                <div class="user-info">
+                    <span>Welcome, Faculty</span>
+                    <div class="user-avatar">F</div>
+                </div>
+            </header>
+
+            <!-- Quick Navigation Menu -->
+            <div class="quick-nav">
+                <a href="index.html" data-tooltip="Dashboard"><i class="fas fa-home"></i></a>
+                <a href="helpCenter.html" data-tooltip="Help Center"><i class="fas fa-question-circle"></i></a>
+                <a href="documentation.html" data-tooltip="Documentation" class="active"><i class="fas fa-file-alt"></i></a>
+                <a href="systemStatus.html" data-tooltip="System Status"><i class="fas fa-server"></i></a>
+                <a href="contactSupport.html" data-tooltip="Contact Support"><i class="fas fa-headset"></i></a>
+            </div>
+
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1>Documentation & Guides</h1>
+                <p>Comprehensive guides and documentation for all UniPortal features and functionalities</p>
+            </section>
+
+            <!-- Search Documentation -->
+            <div class="doc-search">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search documentation...">
+                </div>
+            </div>
+
+            <!-- Documentation Categories -->
+            <div class="doc-categories">
+                <button class="doc-category-btn active" onclick="showDocSection('getting-started')">Getting Started</button>
+                <button class="doc-category-btn" onclick="showDocSection('user-guide')">User Guide</button>
+                <button class="doc-category-btn" onclick="showDocSection('faculty-guide')">Faculty Guide</button>
+                <button class="doc-category-btn" onclick="showDocSection('admin-guide')">Admin Guide</button>
+                <button class="doc-category-btn" onclick="showDocSection('api-docs')">API Documentation</button>
+                <button class="doc-category-btn" onclick="showDocSection('faqs')">FAQs</button>
+            </div>
+
+            <!-- Documentation Sections -->
+            <section id="getting-started" class="doc-section active">
+                <h2>Getting Started with UniPortal</h2>
+                
+                <div class="doc-item">
+                    <h3>Introduction to UniPortal</h3>
+                    <p>UniPortal is a comprehensive university management system designed to streamline academic operations. This guide will help you get started with the basic features and navigation.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+                
+                <div class="doc-item">
+                    <h3>Creating Your Account</h3>
+                    <p>Learn how to create and set up your UniPortal account, including profile completion and privacy settings.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+                
+                <div class="doc-item">
+                    <h3>Navigation Basics</h3>
+                    <p>Understand the UniPortal interface, sidebar navigation, and how to access different modules.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+            </section>
+
+            <section id="user-guide" class="doc-section">
+                <h2>User Guide</h2>
+                
+                <div class="doc-item">
+                    <h3>Course Enrollment Process</h3>
+                    <p>Step-by-step guide on how to browse, select, and enroll in courses through UniPortal.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+                
+                <div class="doc-item">
+                    <h3>Assignment Submission</h3>
+                    <p>Learn how to submit assignments, view submission status, and check grades.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+                
+                <div class="doc-item">
+                    <h3>Grade Tracking</h3>
+                    <p>Guide on accessing and understanding your academic performance metrics.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+            </section>
+
+            <section id="faculty-guide" class="doc-section">
+                <h2>Faculty Guide</h2>
+                
+                <div class="doc-item">
+                    <h3>Course Management</h3>
+                    <p>How to create, manage, and update course content, assignments, and materials.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+                
+                <div class="doc-item">
+                    <h3>Grade Management</h3>
+                    <p>Comprehensive guide on entering grades, creating gradebooks, and generating reports.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+                
+                <div class="doc-item">
+                    <h3>Attendance Tracking</h3>
+                    <p>Guide on using the attendance system to track student participation.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+            </section>
+
+            <section id="admin-guide" class="doc-section">
+                <h2>Administrator Guide</h2>
+                
+                <div class="doc-item">
+                    <h3>User Management</h3>
+                    <p>Complete guide on managing user accounts, roles, and permissions.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+                
+                <div class="doc-item">
+                    <h3>System Configuration</h3>
+                    <p>Advanced system settings and configuration options for administrators.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+                
+                <div class="doc-item">
+                    <h3>Reporting & Analytics</h3>
+                    <p>Generating and analyzing system reports for decision making.</p>
+                    <a href="#" class="doc-link"><i class="fas fa-book-open"></i> Read Full Guide</a>
+                </div>
+            </section>
+
+            <!-- Download Section -->
+            <section class="contact-support-box" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+                <h3>Download Complete Documentation</h3>
+                <p>Access the full UniPortal documentation as a PDF for offline reference.</p>
+                <button class="btn-primary" onclick="location.href='#'" style="background: white; color: #059669; margin-top: 15px;">
+                    <i class="fas fa-download"></i> Download PDF Guide
+                </button>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>UniPortal</h3>
+                        <p>Comprehensive University Management System for modern educational institutions.</p>
+                        <div class="social-links">
+                            <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <p><a href="index.html">Dashboard</a></p>
+                        <p><a href="userManagement.html">User Management</a></p>
+                        <p><a href="courseManagement.html">Course Management</a></p>
+                        <p><a href="departmentManagement.html">Department Management</a></p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Contact Info</h3>
+                        <p><i class="fas fa-envelope"></i> farhansadik91683@UniPortal.edu</p>
+                        <p><i class="fas fa-phone"></i> +08801581173911</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Sh-46, Road-06, Dhanmondi, Dhaka-1209</p>
+                        <p><a href="feedback.html"><i class="fas fa-comment"></i> Send Feedback</a></p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Support</h3>
+                        <p><a href="helpCenter.html"><i class="fas fa-question-circle"></i> Help Center</a></p>
+                        <p><a href="documentation.html" class="active"><i class="fas fa-file-alt"></i> Documentation</a></p>
+                        <p><a href="systemStatus.html"><i class="fas fa-server"></i> System Status</a></p>
+                        <p><a href="contactSupport.html"><i class="fas fa-headset"></i> Contact Support</a></p>
+                    </div>
+                </div>
+                
+                <div class="copyright">
+                    <p>&copy; 2024 UniPortal University Management System. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="index.js"></script>
+    <script>
+        // Documentation section switching
+        function showDocSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.doc-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active button
+            document.querySelectorAll('.doc-category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+        }
+        
+        // Search functionality
+        document.querySelector('.search-box input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const docItems = document.querySelectorAll('.doc-item');
+            
+            docItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
