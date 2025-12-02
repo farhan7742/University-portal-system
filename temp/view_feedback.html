@@ -5,141 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Feedback - UniPortal</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .rating-container {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .rating-stars {
-            display: flex;
-            gap: 5px;
-        }
-
-        .rating-star {
-            font-size: 24px;
-            cursor: pointer;
-            color: #ddd;
-            transition: color 0.2s ease;
-        }
-
-        .rating-star:hover,
-        .rating-star.active {
-            color: #f39c12;
-        }
-
-        .status-badge {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .status-new {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-read {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-
-        .status-replied {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .feedback-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-reply {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .btn-reply:hover {
-            background: #2980b9;
-        }
-
-        .search-section {
-            margin-bottom: 30px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border: 1px solid #ecf0f1;
-        }
-
-        .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #3498db;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: #7f8c8d;
-        }
-    </style>
 </head>
 <body>
   <div class="dashboard">
     <aside class="sidebar">
-      <h2 class="logo">Uni<span>Portal</span></h2>
-      <ul>
-        <li><a href="index.html">Dashboard</a></li>
-        <li><a href="userManagement.html">User Management</a></li>
-        <li><a href="courseManagement.html">Course Management</a></li>
-        <li><a href="departmentManagement.html">Department Management</a></li>
-        <li><a href="attendanceManagement.html">Attendance Management</a></li>
-        <li><a href="feedback.html">Submit Feedback</a></li>
-        <li><a href="view_feedback.html" class="active">View Feedback</a></li>
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">U</div>
+          <div class="logo-text">
+            <span>Uni</span><span>Portal</span>
+            <div class="logo-subtitle">Admin Panel</div>
+          </div>
+        </div>
+        <button class="toggle-sidebar">☰</button>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link active">Dashboard</a></li>
+        <li class="nav-item"><a href="userManagement.html" class="nav-link active">User Management</a></li>
+        <li class="nav-item"><a href="courseManagement.html" class="nav-link active">Course Management</a></li>
+        <li class="nav-item"><a href="departmentManagement.html" class="nav-link active">Department Management</a></li>
+        <li class="nav-item"><a href="attendanceManagement.html" class="nav-link active">Attendance Management</a></li>
+        <li class="nav-item"><a href="feedback.html" class="nav-link active">Submit Feedback</a></li>
+        <li class="nav-item"><a href="view_feedback.html" class="nav-link active">View Feedback</a></li>
+        <li class="nav-item"><a href="courselist.html" class="nav-link active">Course list</a></li>
+        <li class="nav-item"><a href="assessments.html" class="nav-link active">Assessments</a></li>
+        <li class="nav-item"><a href="enrolledCourses.html" class="nav-link active">Enrolled Course</a></li>
+        <li class="nav-item"><a href="grade_submission.html" class="nav-link active">Grade Submission</a></li>
       </ul>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar">A</div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Administrator</div>
+          </div>
+        </div>
+      </div>
     </aside>
 
     <main class="main-content">
       <header class="topbar">
-        <h1>View Feedback</h1>
+        <div class="page-title">
+          <h1>View Feedback</h1>
+          <div class="page-subtitle">Review and manage user feedback</div>
+        </div>
+        <div class="topbar-actions">
+          <button class="notification-btn">🔔<span class="notification-badge">3</span></button>
+        </div>
       </header>
 
       <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-icon">💬</span>
+            Feedback Management
+          </h2>
+        </div>
+
         <!-- Feedback Statistics -->
-        <div id="feedbackStats" class="stats-container">
-          <div class="no-data">Loading statistics...</div>
+        <div class="form-section">
+          <h3>Feedback Statistics</h3>
+          <div id="feedbackStats" class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Total Feedback</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">0</div>
+              <div class="stat-label">New Feedback</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">0</div>
+              <div class="stat-label">Average Rating</div>
+            </div>
+          </div>
         </div>
 
         <!-- Search Feedback -->
-        <div class="search-section">
+        <div class="form-section">
           <h3>Search Feedback</h3>
-          <div class="search-box">
-            <input type="text" id="searchFeedback" placeholder="Search feedback by name, email, or subject...">
-            <button class="search-btn" onclick="searchFeedback()">Search Feedback</button>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="searchFeedback" class="form-control" 
+                     placeholder="Search feedback by name, email, or subject...">
+            </div>
+            <button class="btn-primary" onclick="searchFeedback()">Search</button>
+            <button class="btn-secondary" onclick="resetFeedbackSearch()">Reset</button>
           </div>
         </div>
 
         <!-- Feedback List -->
-        <div class="list-caption">Feedback Records</div>
+        <div class="section-header">
+          <h3 class="card-title">
+            <span class="card-icon">📋</span>
+            Feedback Records
+          </h3>
+          <div class="section-actions">
+            <span id="feedbackCount" class="badge">0 feedback</span>
+          </div>
+        </div>
+
         <div id="feedbackList" class="no-data">Loading feedback...</div>
       </div>
     </main>
@@ -151,11 +116,15 @@
         loadFeedback();
         loadFeedbackStats();
         setupSearchFunctionality();
+        
+        // Sidebar toggle
+        document.querySelector('.toggle-sidebar').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('collapsed');
+        });
     });
 
     // Setup search functionality
     function setupSearchFunctionality() {
-        // Search on enter key
         const searchInput = document.getElementById('searchFeedback');
         if (searchInput) {
             searchInput.addEventListener('keypress', function(e) {
@@ -203,6 +172,12 @@
             console.error('Error searching feedback:', error);
             document.getElementById('feedbackList').innerHTML = '<div class="no-data">Error searching feedback</div>';
         });
+    }
+
+    // Reset search
+    function resetFeedbackSearch() {
+        document.getElementById('searchFeedback').value = '';
+        loadFeedback();
     }
 
     // Load feedback statistics
