@@ -5,113 +5,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Feedback - UniPortal</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .feedback-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e1e8ed;
-            border-radius: 6px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #3498db;
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .rating-container {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .view-feedback-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .view-feedback-link:hover {
-            background-color: #2980b9;
-        }
-    </style>
 </head>
 <body>
   <div class="dashboard">
     <aside class="sidebar">
-      <h2 class="logo">Uni<span>Portal</span></h2>
-      <ul>
-        <li><a href="index.html">Dashboard</a></li>
-        <li><a href="userManagement.html">User Management</a></li>
-        <li><a href="courseManagement.html">Course Management</a></li>
-        <li><a href="departmentManagement.html">Department Management</a></li>
-        <li><a href="attendanceManagement.html">Attendance Management</a></li>
-        <li><a href="feedback.html" class="active">Submit Feedback</a></li>
-        <li><a href="view_feedback.html">View Feedback</a></li>
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">U</div>
+          <div class="logo-text">
+            <span>Uni</span><span>Portal</span>
+            <div class="logo-subtitle">Admin Panel</div>
+          </div>
+        </div>
+        <button class="toggle-sidebar">☰</button>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Dashboard</a></li>
+        <li class="nav-item"><a href="userManagement.html" class="nav-link">User Management</a></li>
+        <li class="nav-item"><a href="courseManagement.html" class="nav-link">Course Management</a></li>
+        <li class="nav-item"><a href="departmentManagement.html" class="nav-link">Department Management</a></li>
+        <li class="nav-item"><a href="attendanceManagement.html" class="nav-link">Attendance Management</a></li>
+        <li class="nav-item"><a href="feedback.html" class="nav-link active">Submit Feedback</a></li>
+        <li class="nav-item"><a href="courselist.html" class="nav-link">Course list</a></li>
+        <li class="nav-item"><a href="assessments.html" class="nav-link">Assessments</a></li>
+        <li class="nav-item"><a href="enrolledCourses.html" class="nav-link">Enrolled Course</a></li>
+        <li class="nav-item"><a href="grade_submission.html" class="nav-link">Grade Submission</a></li>
       </ul>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar">A</div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Administrator</div>
+          </div>
+        </div>
+      </div>
     </aside>
 
     <main class="main-content">
       <header class="topbar">
-        <h1>Submit Feedback</h1>
+        <div class="page-title">
+          <h1>Submit Feedback</h1>
+          <div class="page-subtitle">Share your experience with us</div>
+        </div>
+        <div class="topbar-actions">
+          <button class="notification-btn">🔔<span class="notification-badge">3</span></button>
+        </div>
       </header>
 
       <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-icon">📝</span>
+            Submit Feedback
+          </h2>
+        </div>
+
         <!-- Feedback Form -->
         <div class="form-section">
-          <h3>Submit Feedback</h3>
+          <h3>Share Your Feedback</h3>
           <form id="feedbackForm" class="feedback-form">
-            <div class="form-group">
-              <label for="feedbackName">Your Name:</label>
-              <input type="text" id="feedbackName" name="name" placeholder="Enter your name" required>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="feedbackName" class="form-label">Your Name</label>
+                <input type="text" id="feedbackName" name="name" class="form-control" 
+                       placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="feedbackEmail" class="form-label">Your Email</label>
+                <input type="email" id="feedbackEmail" name="email" class="form-control" 
+                       placeholder="Enter your email" required>
+              </div>
             </div>
-
-            <div class="form-group">
-              <label for="feedbackEmail">Your Email:</label>
-              <input type="email" id="feedbackEmail" name="email" placeholder="Enter your email" required>
-            </div>
-
-            <div class="form-group">
-              <label for="feedbackSubject">Subject:</label>
-              <input type="text" id="feedbackSubject" name="subject" placeholder="Enter subject" required>
-            </div>
-
-            <div class="form-group">
-              <label for="feedbackRating">Rating:</label>
-              <div class="rating-container">
-                <select id="feedbackRating" name="rating" required>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="feedbackSubject" class="form-label">Subject</label>
+                <input type="text" id="feedbackSubject" name="subject" class="form-control" 
+                       placeholder="Enter subject" required>
+              </div>
+              <div class="form-group">
+                <label for="feedbackRating" class="form-label">Rating</label>
+                <select id="feedbackRating" name="rating" class="form-control" required>
                   <option value="">Select Rating</option>
                   <option value="5">⭐⭐⭐⭐⭐ Excellent (5)</option>
                   <option value="4">⭐⭐⭐⭐ Very Good (4)</option>
@@ -123,14 +98,17 @@
             </div>
 
             <div class="form-group">
-              <label for="feedbackMessage">Your Message:</label>
-              <textarea id="feedbackMessage" name="message" placeholder="Enter your feedback message..." required></textarea>
+              <label for="feedbackMessage" class="form-label">Your Message</label>
+              <textarea id="feedbackMessage" name="message" class="form-control" 
+                        placeholder="Enter your feedback message..." 
+                        rows="5" required></textarea>
             </div>
 
-            <button type="submit" class="btn-primary">Submit Feedback</button>
+            <div class="form-group">
+              <button type="submit" class="btn-success">Submit Feedback</button>
+              
+            </div>
           </form>
-          
-          <a href="view_feedback.html" class="view-feedback-link">View All Feedback</a>
         </div>
       </div>
     </main>
@@ -140,6 +118,11 @@
     // Initialize when page loads
     document.addEventListener('DOMContentLoaded', function() {
         setupFeedbackForm();
+        
+        // Sidebar toggle
+        document.querySelector('.toggle-sidebar').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('collapsed');
+        });
     });
 
     // Setup feedback form
