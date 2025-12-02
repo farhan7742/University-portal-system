@@ -8,45 +8,125 @@
 </head>
 <body>
   <div class="dashboard">
+    <!-- Updated Sidebar -->
     <aside class="sidebar">
-      <h2 class="logo">Uni<span>Portal</span></h2>
-      <ul>
-        <li><a href="index.html">Dashboard</a></li>
-        <li><a href="userManagement.html" class="active">User Management</a></li>
-        <li><a href="courseManagement.html">Course Management</a></li>
-        <li><a href="departmentManagement.html">Department Management</a></li>
-        <li><a href="attendanceManagement.html">Attendance Management</a></li>
-        <li><a href="feedback.html">Feedback</a></li>
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">U</div>
+          <div class="logo-text">
+            <span>Uni</span><span>Portal</span>
+            <div class="logo-subtitle">Admin Panel</div>
+          </div>
+        </div>
+        <button class="toggle-sidebar">☰</button>
+      </div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link active">Dashboard</a></li>
+        <li class="nav-item"><a href="userManagement.html" class="nav-link active">User Management</a></li>
+        <li class="nav-item"><a href="courseManagement.html" class="nav-link active">Course Management</a></li>
+        <li class="nav-item"><a href="departmentManagement.html" class="nav-link active">Department Management</a></li>
+        <li class="nav-item"><a href="attendanceManagement.html" class="nav-link active">Attendance Management</a></li>
+        <li class="nav-item"><a href="feedback.html" class="nav-link active">Submit Feedback</a></li>
+        <li class="nav-item"><a href="courselist.html" class="nav-link active">Course list</a></li>
+        <li class="nav-item"><a href="assessments.html" class="nav-link active">Assessments</a></li>
+        <li class="nav-item"><a href="enrolledCourses.html" class="nav-link active">Enrolled Course</a></li>
+        <li class="nav-item"><a href="grade_submission.html" class="nav-link active">Grade Submission</a></li>
+
       </ul>
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <div class="avatar">A</div>
+          <div class="user-info">
+            <div class="user-name">Admin User</div>
+            <div class="user-role">Administrator</div>
+          </div>
+        </div>
+      </div>
     </aside>
 
     <main class="main-content">
+      <!-- Updated Topbar -->
       <header class="topbar">
-        <h1>User Management</h1>
+        <div class="page-title">
+          <h1>User Management</h1>
+          <div class="page-subtitle">Manage system users</div>
+        </div>
+        <div class="topbar-actions">
+          <button class="notification-btn">🔔<span class="notification-badge">3</span></button>
+        </div>
       </header>
 
+      <!-- User Management Card -->
       <div class="card">
-        <div class="search-section">
-          <input type="text" id="searchTermUser" placeholder="Search users..." oninput="searchUsers()">
-          <button class="search-btn" onclick="searchUsers()">Search</button>
+        <div class="card-header">
+          <h2 class="card-title">
+            <span class="card-icon">👥</span>
+            User Management
+          </h2>
+          <div class="card-actions">
+            <button class="btn-primary" onclick="exportUsers()">Export Users</button>
+          </div>
         </div>
 
-        <form method="POST" id="addUserForm">
-          <div class="form">
-            <input type="text" name="name" id="name" placeholder="Enter Full Name" required>
-            <input type="email" name="email" id="email" placeholder="Enter Email Address" required>
-            <input type="tel" name="phone_number" id="phone_number" placeholder="Enter Phone Number" required>
-
-            <button class="btn-primary" type="submit">Add User</button>
+        <!-- Search Section -->
+        <div class="search-section">
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="searchTermUser" class="form-control" placeholder="Search users by name, email or phone..." oninput="searchUsers()">
+            </div>
+            <button class="btn-primary" onclick="searchUsers()">Search</button>
+            <button class="btn-secondary" onclick="resetSearch()">Reset</button>
           </div>
+        </div>
+
+        <!-- Add User Form -->
+        <form method="POST" id="addUserForm" class="form-section">
+          <h3>Add New User</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name" class="form-label">Full Name</label>
+              <input type="text" name="name" id="name" class="form-control" placeholder="Enter full name" required>
+            </div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" name="email" id="email" class="form-control" placeholder="Enter email address" required>
+            </div>
+            <div class="form-group">
+              <label for="phone_number" class="form-label">Phone Number</label>
+              <input type="tel" name="phone_number" id="phone_number" class="form-control" placeholder="Enter phone number" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-success">Add User</button>
         </form>
 
-        <div class="list-caption">Users List</div>
-        <ul id="userList"></ul>
+        <!-- Users List -->
+        <div class="section-header">
+          <h3 class="card-title">
+            <span class="card-icon">📋</span>
+            Users List
+          </h3>
+          <div class="section-actions">
+            <span id="userCount" class="badge">0 users</span>
+          </div>
+        </div>
+
+        <div id="userList" class="no-data">Loading users...</div>
       </div>
     </main>
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Sidebar toggle functionality
+    document.querySelector('.toggle-sidebar').addEventListener('click', function() {
+      document.querySelector('.sidebar').classList.toggle('collapsed');
+    });
+
+    // Form submission
+    document.getElementById('addUserForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Add your form submission logic here
+    });
+  </script>
 </body>
 </html>
