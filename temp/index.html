@@ -34,36 +34,27 @@
             <div class="sidebar-nav">
                 <ul>
                     <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-                    <li><a href="StudentProfile.html"><i class="fas fa-user"></i> Student Profile</a></li>
                     <li><a href="userManagement.html"><i class="fas fa-users"></i> User Management</a></li>
                     <li><a href="courseManagement.html"><i class="fas fa-book"></i> Course Management</a></li>
                     <li><a href="departmentManagement.html"><i class="fas fa-building"></i> Department Management</a></li>
                     <li><a href="attendanceManagement.html"><i class="fas fa-calendar-check"></i> Attendance Management</a></li>
-                    <li><a href="feedback.html"><i class="fas fa-comment"></i> Feedback</a></li>
-                    <li><a href="noticeboard.html"><i class="fas fa-bullhorn"></i> Noticeboard</a></li>
                     <li><a href="courselist.html"><i class="fas fa-list"></i> Course List</a></li>
                     <li><a href="enrolledCourses.html"><i class="fas fa-graduation-cap"></i> Enrolled Courses</a></li>
-                    <li><a href="adminPanel.html"><i class="fas fa-cog"></i> Admin Panel</a></li>
-                    <li><a href="reports.html"><i class="fas fa-chart-bar"></i> Reports</a></li>
-                    <li><a href="settings.html"><i class="fas fa-sliders-h"></i> Settings</a></li>
-                    <li><a href="help.html"><i class="fas fa-question-circle"></i> Help & Support</a></li>
-                    <li><a href="resources.html"><i class="fas fa-book-open"></i> Resources</a></li>
-                    <li><a href="events.html"><i class="fas fa-calendar-alt"></i> Events</a></li>
-                    <li><a href="library.html"><i class="fas fa-book-reader"></i> Library</a></li>
-                    <li><a href="finance.html"><i class="fas fa-money-bill-wave"></i> Finance</a></li>
-                    <li><a href="alumni.html"><i class="fas fa-user-graduate"></i> Alumni</a></li>
-                    <li><a href="careers.html"><i class="fas fa-briefcase"></i> Careers</a></li>
-                    <!-- ADDED LOGOUT LINK -->
-                    <li><a href="Loginsignup.html" class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                     <li><a href="assessments.html"><i class="fas fa-bullhorn"></i> Assessments</a></li>
+                     <li><a href="grade_submission.html"><i class="fas fa-graduation-cap"></i> Grade Submision</a></li>
+                      <li><a href="announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+                      <li><a href="feedback.html"><i class="fas fa-comment"></i> Feedback</a></li>
+                    <li><a href="view_feedback.html"><i class="fas fa-chart-bar"></i> View feedback</a></li>
+
                 </ul>
             </div>
             
             <div class="sidebar-footer">
                 <div class="user-profile">
-                    <div class="user-avatar-small">S</div>
+                    <div class="user-avatar-small">F</div>
                     <div class="user-details">
-                        <div class="user-name">Sarah Johnson</div>
-                        <div class="user-role">Student</div>
+                        <div class="user-name">Welcome Faculty</div>
+                        
                     </div>
                 </div>
             </div>
@@ -73,8 +64,8 @@
             <header class="topbar">
                 <h1>Dashboard</h1>
                 <div class="user-info">
-                    <span>Welcome, Student</span>
-                    <div class="user-avatar">S</div>
+                    <span>Welcome, Faculty</span>
+                    <div class="user-avatar">F</div>
                 </div>
             </header>
 
@@ -95,115 +86,889 @@
                 <button class="btn-primary" onclick="location.href='userManagement.html'">Get Started</button>
             </section>
 
-            <!-- Noticeboard Section -->
-            <section class="noticeboard-section" id="noticeboard">
-                <div class="noticeboard-header">
-                    <h2>University Noticeboard</h2>
-                    <button class="btn-primary" onclick="location.href='noticeboard.html'">View All</button>
-                </div>
-                <div class="notice-list">
-                    <div class="notice-item">
-                        <div class="notice-title">Final Exam Schedule Released</div>
-                        <div class="notice-date">Posted: October 15, 2024</div>
-                        <div class="notice-content">The final examination schedule for the Fall 2024 semester has been published. Please check your student portal for details.</div>
-                    </div>
-                    <div class="notice-item">
-                        <div class="notice-title">Campus Maintenance This Weekend</div>
-                        <div class="notice-date">Posted: October 12, 2024</div>
-                        <div class="notice-content">The library and student center will undergo maintenance this weekend. Please plan accordingly.</div>
-                    </div>
-                    <div class="notice-item">
-                        <div class="notice-title">Scholarship Applications Open</div>
-                        <div class="notice-date">Posted: October 10, 2024</div>
-                        <div class="notice-content">Applications for the Spring 2025 scholarship program are now being accepted. Deadline is November 15.</div>
-                    </div>
-                </div>
-            </section>
+          <!-- Noticeboard Section -->
+<section class="noticeboard-section" id="noticeboard">
+    <div class="noticeboard-header">
+        <h2>University Announcements</h2>
+        <button class="btn-primary" onclick="location.href='announcements.html'">View All</button>
+    </div>
+    <div class="notice-list" id="noticeList">
+        <!-- Dynamic notices will be inserted here -->
+        <div class="notice-loading">Loading announcements...</div>
+    </div>
+</section>
 
-            <!-- Quick Stats -->
-            <div class="stats-section" id="stats">
-                <div class="stat-card">
-                    <span class="stat-number" id="userCount">0</span>
-                    <span class="stat-label">Total Users</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" id="courseCount">0</span>
-                    <span class="stat-label">Active Courses</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" id="deptCount">0</span>
-                    <span class="stat-label">Departments</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" id="attendanceCount">0</span>
-                    <span class="stat-label">Attendance Records</span>
-                </div>
-            </div>
 
-            <!-- Courses Section -->
-            <div class="courses-section" id="courses">
-                <div class="course-list">
-                    <div class="section-header">
-                        <h2>Available Courses</h2>
-                        <button class="btn-primary" onclick="location.href='courselist.html'">View All</button>
+<script>
+// Function to load latest announcements for the noticeboard
+async function loadNoticeboardAnnouncements() {
+    try {
+        const response = await fetch('announcements_api.php?action=list');
+        const result = await response.json();
+        
+        if (result.success) {
+            const noticeList = document.getElementById('noticeList');
+            const announcements = result.data.slice(0, 5); // Show only latest 5
+            
+            if (announcements.length === 0) {
+                noticeList.innerHTML = `
+                    <div class="no-data">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>No Announcements Yet</h3>
+                        <p>Check back later for updates</p>
                     </div>
-                    <div class="course-item">
-                        <div class="course-info">
-                            <h3>Introduction to Computer Science</h3>
-                            <p>CS101 - Dr. Johnson</p>
-                        </div>
-                        <button class="btn-secondary">Enroll</button>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-info">
-                            <h3>Advanced Calculus</h3>
-                            <p>MATH201 - Prof. Williams</p>
-                        </div>
-                        <button class="btn-secondary">Enroll</button>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-info">
-                            <h3>Modern Literature</h3>
-                            <p>ENG150 - Dr. Garcia</p>
-                        </div>
-                        <button class="btn-secondary">Enroll</button>
-                    </div>
-                </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            announcements.forEach(announcement => {
+                const priorityIcon = getPriorityIcon(announcement.priority);
+                const audienceLabel = getAudienceLabel(announcement.target_audience);
                 
-                <div class="enrolled-courses">
-                    <div class="section-header">
-                        <h2>My Enrolled Courses</h2>
-                        <button class="btn-primary" onclick="location.href='enrolledCourses.html'">View All</button>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-info">
-                            <h3>Database Systems</h3>
-                            <p>CS305 - Prof. Davis</p>
+                html += `
+                    <div class="notice-item ${announcement.priority === 'high' ? 'priority-high' : announcement.priority === 'medium' ? 'priority-medium' : 'priority-low'}">
+                        <div class="notice-header">
+                            <h3 class="notice-title">${escapeHtml(announcement.title)}</h3>
+                            <span class="notice-priority">${priorityIcon} ${announcement.priority}</span>
                         </div>
-                        <div class="course-status">
-                            <span style="color: #00bfa6;">●</span> Active
+                        <div class="notice-content">${escapeHtml(announcement.content.substring(0, 150))}${announcement.content.length > 150 ? '...' : ''}</div>
+                        <div class="notice-footer">
+                            <span class="notice-audience"><i class="fas fa-users"></i> ${audienceLabel}</span>
+                            <span class="notice-date"><i class="fas fa-calendar"></i> ${formatDate(announcement.date)}</span>
                         </div>
                     </div>
-                    <div class="course-item">
-                        <div class="course-info">
-                            <h3>Software Engineering</h3>
-                            <p>CS310 - Dr. Martinez</p>
-                        </div>
-                        <div class="course-status">
-                            <span style="color: #00bfa6;">●</span> Active
-                        </div>
-                    </div>
-                    <div class="course-item">
-                        <div class="course-info">
-                            <h3>Data Structures & Algorithms</h3>
-                            <p>CS210 - Prof. Thompson</p>
-                        </div>
-                        <div class="course-status">
-                            <span style="color: #ef4444;">●</span> Completed
-                        </div>
-                    </div>
+                `;
+            });
+            
+            noticeList.innerHTML = html;
+        } else {
+            document.getElementById('noticeList').innerHTML = `
+                <div class="no-data">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Failed to Load</h3>
+                    <p>Unable to load announcements</p>
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Error loading noticeboard announcements:', error);
+        document.getElementById('noticeList').innerHTML = `
+            <div class="no-data">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Connection Error</h3>
+                <p>Please check your internet connection</p>
+            </div>
+        `;
+    }
+}
+
+// Helper function to get priority icon
+function getPriorityIcon(priority) {
+    const icons = {
+        'high': '<i class="fas fa-exclamation-triangle" style="color: #e74c3c;"></i>',
+        'medium': '<i class="fas fa-exclamation-circle" style="color: #f39c12;"></i>',
+        'low': '<i class="fas fa-info-circle" style="color: #27ae60;"></i>'
+    };
+    return icons[priority] || '<i class="fas fa-info-circle"></i>';
+}
+
+// Helper function to get audience label
+function getAudienceLabel(audience) {
+    const labels = {
+        'all': 'All Users',
+        'students': 'Students',
+        'faculty': 'Faculty',
+        'staff': 'Staff'
+    };
+    return labels[audience] || audience;
+}
+
+// Helper function to format date
+function formatDate(dateString) {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+        year: 'numeric', 
+        month: 'short', 
+        day: 'numeric' 
+    });
+}
+
+// Helper function to escape HTML
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Add CSS styles for the noticeboard
+const noticeboardStyles = `
+    <style>
+        .noticeboard-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .noticeboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .noticeboard-header h2 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+        
+        .notice-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .notice-item {
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .notice-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .notice-item.priority-high {
+            border-left-color: #e74c3c;
+        }
+        
+        .notice-item.priority-medium {
+            border-left-color: #f39c12;
+        }
+        
+        .notice-item.priority-low {
+            border-left-color: #27ae60;
+        }
+        
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .notice-title {
+            margin: 0;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            flex: 1;
+        }
+        
+        .notice-priority {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            background: #eee;
+            margin-left: 10px;
+        }
+        
+        .notice-content {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .notice-footer {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+        
+        .notice-audience, .notice-date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .notice-loading {
+            text-align: center;
+            padding: 20px;
+            color: #3498db;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 40px 20px;
+            color: #7f8c8d;
+        }
+        
+        .no-data i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            color: #bdc3c7;
+        }
+        
+        .no-data h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+    </style>
+`;
+
+
+// Add styles to document
+document.head.insertAdjacentHTML('beforeend', noticeboardStyles);
+
+// Load announcements when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadNoticeboardAnnouncements();
+    
+    // Refresh announcements every 5 minutes
+    setInterval(loadNoticeboardAnnouncements, 5 * 60 * 1000);
+});
+
+// Animated counter for stats (this should be in your main dashboard page)
+function animateCounter(elementId, targetValue, duration = 2000) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    let startValue = 0;
+    const increment = targetValue / (duration / 16);
+    
+    const updateCounter = () => {
+        startValue += increment;
+        if (startValue < targetValue) {
+            element.textContent = Math.floor(startValue);
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = targetValue;
+        }
+    };
+    
+    updateCounter();
+}
+
+// Function to update dashboard statistics
+async function updateDashboardStats() {
+    try {
+        const response = await fetch('announcements_api.php?action=stats');
+        const result = await response.json();
+        
+        if (result.success) {
+            // If these elements exist on your dashboard, update them with animation
+            if (document.getElementById('totalAnnouncements')) {
+                animateCounter('totalAnnouncements', result.data.total);
+            }
+            if (document.getElementById('activeAnnouncements')) {
+                animateCounter('activeAnnouncements', result.data.active);
+            }
+            if (document.getElementById('todayAnnouncements')) {
+                animateCounter('todayAnnouncements', result.data.today);
+            }
+        }
+    } catch (error) {
+        console.error('Error updating dashboard stats:', error);
+    }
+}
+
+// Call this when your dashboard loads
+document.addEventListener('DOMContentLoaded', function() {
+    updateDashboardStats();
+});
+</script>
+
+            
+<!-- Courses Section -->
+<div class="courses-section" id="courses">
+    <div class="course-list">
+        <div class="section-header">
+            <h2>Available Courses</h2>
+            <button class="btn-primary" onclick="location.href='courselist.html'">View All</button>
+        </div>
+        <div id="availableCourses">
+            <!-- Dynamic available courses will be inserted here -->
+            <div class="course-loading">Loading available courses...</div>
+        </div>
+    </div>    
+    <div class="enrolled-courses">
+        <div class="section-header">
+            <h2>My Enrolled Courses</h2>
+            <button class="btn-primary" onclick="location.href='enrolledCourses.html'">View All</button>
+        </div>
+        <div id="dashboardEnrolledCourses">
+            <!-- Dynamic enrolled courses will be inserted here -->
+            <div class="course-loading">Loading enrolled courses...</div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Courses Section Styles */
+    .courses-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+    
+    .course-list, .enrolled-courses {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border: 1px solid #e5e7eb;
+    }
+    
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #f3f4f6;
+    }
+    
+    .section-header h2 {
+        margin: 0;
+        color: #1f2937;
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+    
+    .dashboard-course-item {
+        border-left: 4px solid #3b82f6;
+        padding: 18px;
+        background: #f9fafb;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease;
+        border: 1px solid #e5e7eb;
+    }
+    
+    .dashboard-course-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        border-left-color: #1d4ed8;
+    }
+    
+    .dashboard-course-item.enrolled {
+        border-left-color: #10b981;
+    }
+    
+    .dashboard-course-item .course-title {
+        margin: 0 0 10px 0;
+        font-size: 16px;
+        color: #111827;
+        font-weight: 600;
+        line-height: 1.4;
+    }
+    
+    .dashboard-course-item .course-code {
+        display: inline-block;
+        background: #3b82f6;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 8px;
+    }
+    
+    .dashboard-course-item.enrolled .course-code {
+        background: #10b981;
+    }
+    
+    .dashboard-course-item .course-meta {
+        display: flex;
+        gap: 15px;
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+    }
+    
+    .dashboard-course-item .course-description {
+        color: #4b5563;
+        font-size: 14px;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .dashboard-course-item .course-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .dashboard-course-item .course-credits {
+        font-weight: 600;
+        color: #3b82f6;
+        font-size: 14px;
+    }
+    
+    .dashboard-course-item.enrolled .course-credits {
+        color: #10b981;
+    }
+    
+    .dashboard-course-item .course-section {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #dbeafe;
+        color: #1e40af;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    
+    .dashboard-course-item .course-schedule {
+        font-size: 12px;
+        color: #6b7280;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .no-data, .course-loading {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6b7280;
+    }
+    
+    .no-data i, .course-loading i {
+        font-size: 48px;
+        margin-bottom: 15px;
+        color: #d1d5db;
+    }
+    
+    .no-data h3 {
+        margin-bottom: 10px;
+        color: #374151;
+    }
+    
+    .no-data p {
+        margin-bottom: 20px;
+        color: #6b7280;
+    }
+    
+    .view-all-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        background: #3b82f6;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .view-all-btn:hover {
+        background: #2563eb;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+    
+    .enrolled-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: #d1fae5;
+        color: #065f46;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 10px;
+    }
+    
+    @media (max-width: 1024px) {
+        .courses-section {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .course-list, .enrolled-courses {
+            padding: 20px;
+        }
+        
+        .section-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .section-header h2 {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+
+<script>
+
+// API endpoints
+const DASHBOARD_COURSES_API = 'dashboard_courses.php';
+const ENROLLED_COURSES_API = 'enrolled_courses.php';
+const COURSES_API = 'co-urses.php?action=dashboard';
+
+// Load dashboard courses
+async function loadDashboardCourses() {
+    try {
+        // Option 1: Load both available and enrolled courses together
+        const response = await fetch(DASHBOARD_COURSES_API);
+        const result = await response.json();
+        
+        if (result.success) {
+            displayAvailableCourses(result.data.available || []);
+            displayEnrolledCourses(result.data.enrolled || []);
+            
+            // Update enrolled courses count
+            if (result.data.enrolled_count) {
+                updateEnrolledCoursesCount(result.data.enrolled_count);
+            }
+        } else {
+            showNoCourses();
+        }
+    } catch (error) {
+        console.error('Error loading dashboard courses:', error);
+        
+        // Fallback: Load courses separately
+        loadAvailableCourses();
+        loadEnrolledCourses();
+    }
+}
+
+// Load available courses separately
+async function loadAvailableCourses() {
+    try {
+        const response = await fetch(COURSES_API);
+        const result = await response.json();
+        
+        if (result.success) {
+            displayAvailableCourses(result.data || []);
+        } else {
+            document.getElementById('availableCourses').innerHTML = `
+                <div class="no-data">
+                    <i class="fas fa-book-open"></i>
+                    <h3>No Courses Available</h3>
+                    <p>Check back later for new course offerings</p>
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Error loading available courses:', error);
+        document.getElementById('availableCourses').innerHTML = `
+            <div class="no-data">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Failed to Load</h3>
+                <p>Unable to load available courses</p>
+            </div>
+        `;
+    }
+}
+
+// Load enrolled courses separately
+async function loadEnrolledCourses() {
+    try {
+        const response = await fetch(`${ENROLLED_COURSES_API}?limit=5`);
+        const result = await response.json();
+        
+        if (result.success) {
+            displayEnrolledCourses(result.data || []);
+            updateEnrolledCoursesCount(result.data.length);
+        } else {
+            document.getElementById('dashboardEnrolledCourses').innerHTML = `
+                <div class="no-data">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Not Enrolled</h3>
+                    <p>You haven't enrolled in any courses yet</p>
+                    <a href="courselist.html" class="view-all-btn">
+                        <i class="fas fa-search"></i> Browse Courses
+                    </a>
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Error loading enrolled courses:', error);
+        document.getElementById('dashboardEnrolledCourses').innerHTML = `
+            <div class="no-data">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Connection Error</h3>
+                <p>Please check your connection</p>
+            </div>
+        `;
+    }
+}
+
+// Display available courses
+function displayAvailableCourses(courses) {
+    const container = document.getElementById('availableCourses');
+    
+    if (!courses || courses.length === 0) {
+        container.innerHTML = `
+            <div class="no-data">
+                <i class="fas fa-book-open"></i>
+                <h3>No Courses Available</h3>
+                <p>Check back later for new course offerings</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    courses.forEach(course => {
+        html += `
+            <div class="dashboard-course-item" data-id="${course.id}">
+                <div class="course-code">${course.course_code || 'N/A'}</div>
+                <h3 class="course-title">${course.course_name || 'Unnamed Course'}</h3>
+                <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> ${course.hours || 3}h/week</span>
+                    <span><i class="fas fa-user-graduate"></i> ${course.credits || 3} Credits</span>
+                </div>
+                <div class="course-description">
+                    ${course.description || 'No description available.'}
+                </div>
+                <div class="course-footer">
+                    <span class="course-credits">${course.credits || 3} Credits</span>
+                    <button class="btn btn-primary btn-sm" onclick="enrollInCourseFromDashboard(${course.id})">
+                        <i class="fas fa-plus"></i> Enroll
+                    </button>
                 </div>
             </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// Display enrolled courses
+function displayEnrolledCourses(courses) {
+    const container = document.getElementById('dashboardEnrolledCourses');
+    
+    if (!courses || courses.length === 0) {
+        container.innerHTML = `
+            <div class="no-data">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Not Enrolled</h3>
+                <p>You haven't enrolled in any courses yet</p>
+                <a href="courselist.html" class="view-all-btn">
+                    <i class="fas fa-search"></i> Browse Courses
+                </a>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    courses.forEach(course => {
+        html += `
+            <div class="dashboard-course-item enrolled" data-id="${course.id}">
+                <div class="course-code">${course.course_code || 'N/A'}</div>
+                <h3 class="course-title">${course.course_name || 'Unnamed Course'}
+                    <span class="enrolled-badge"><i class="fas fa-check"></i> Enrolled</span>
+                </h3>
+                <div class="course-meta">
+                    <span class="course-section"><i class="fas fa-users"></i> Section ${course.section || 'N/A'}</span>
+                    <span class="course-schedule"><i class="fas fa-calendar-alt"></i> ${course.schedule || 'Not scheduled'}</span>
+                </div>
+                <div class="course-footer">
+                    <span class="course-credits">${course.term_name || 'Fall 2024'}</span>
+                    <button class="btn btn-outline btn-sm" onclick="viewCourseDetails(${course.id})">
+                        <i class="fas fa-eye"></i> View
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// Update enrolled courses count in dashboard stats
+function updateEnrolledCoursesCount(count) {
+    const countElement = document.getElementById('enrolledCoursesCount');
+    if (countElement) {
+        animateCounter('enrolledCoursesCount', count, 1500);
+    }
+}
+
+// Enroll in course from dashboard
+async function enrollInCourseFromDashboard(courseId) {
+    if (!confirm('Are you sure you want to enroll in this course?')) {
+        return;
+    }
+    
+    try {
+        showMessage('Enrolling in course...', 'info');
+        
+        const response = await fetch(ENROLLED_COURSES_API, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ course_id: courseId })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showMessage('Successfully enrolled in course!', 'success');
+            
+            // Reload dashboard courses
+            setTimeout(() => {
+                loadDashboardCourses();
+            }, 1000);
+            
+            // Update the course card
+            const courseCard = document.querySelector(`.dashboard-course-item[data-id="${courseId}"]`);
+            if (courseCard) {
+                courseCard.classList.add('enrolled');
+                courseCard.innerHTML = `
+                    <div class="course-code">Enrolled</div>
+                    <h3 class="course-title">${courseCard.querySelector('.course-title').textContent}
+                        <span class="enrolled-badge"><i class="fas fa-check"></i> Enrolled</span>
+                    </h3>
+                    <div class="course-meta">
+                        <span><i class="fas fa-clock"></i> Checking schedule...</span>
+                    </div>
+                    <div class="course-footer">
+                        <span class="course-credits">Enrolled!</span>
+                        <button class="btn btn-success btn-sm" onclick="location.href='enrolledCourses.html'">
+                            <i class="fas fa-external-link-alt"></i> View
+                        </button>
+                    </div>
+                `;
+            }
+        } else {
+            showMessage(result.error || 'Failed to enroll in course', 'error');
+        }
+    } catch (error) {
+        console.error('Error enrolling in course:', error);
+        showMessage('Failed to enroll in course', 'error');
+    }
+}
+
+// View course details
+function viewCourseDetails(courseId) {
+    // You can implement a modal or redirect to course details page
+    // For now, redirect to enrolled courses page
+    window.location.href = `enrolledCourses.html#course-${courseId}`;
+}
+
+// Show no courses message
+function showNoCourses() {
+    document.getElementById('availableCourses').innerHTML = `
+        <div class="no-data">
+            <i class="fas fa-book-open"></i>
+            <h3>No Courses Available</h3>
+            <p>Check back later for new course offerings</p>
+        </div>
+    `;
+    
+    document.getElementById('dashboardEnrolledCourses').innerHTML = `
+        <div class="no-data">
+            <i class="fas fa-user-graduate"></i>
+            <h3>Not Enrolled</h3>
+            <p>You haven't enrolled in any courses yet</p>
+            <a href="courselist.html" class="view-all-btn">
+                <i class="fas fa-search"></i> Browse Courses
+            </a>
+        </div>
+    `;
+}
+
+// Show message to user
+function showMessage(message, type = 'info') {
+    // Remove existing messages
+    document.querySelectorAll('.dashboard-message').forEach(msg => msg.remove());
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `dashboard-message message-${type}`;
+    messageDiv.innerHTML = `
+        <span>${message}</span>
+        <button class="close-message">&times;</button>
+    `;
+    
+    const bgColor = type === 'success' ? '#10b981' : 
+                   type === 'error' ? '#ef4444' : 
+                   type === 'warning' ? '#f59e0b' : '#3b82f6';
+    
+    messageDiv.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: ${bgColor};
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+        min-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        animation: slideIn 0.3s ease-out;
+    `;
+    
+    messageDiv.querySelector('.close-message').addEventListener('click', () => {
+        messageDiv.remove();
+    });
+    
+    document.body.appendChild(messageDiv);
+    
+    setTimeout(() => {
+        if (messageDiv.parentNode) {
+            messageDiv.remove();
+        }
+    }, 4000);
+}
+
+// Animated counter for stats
+function animateCounter(elementId, targetValue, duration = 2000) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    let startValue = 0;
+    const increment = targetValue / (duration / 16);
+    
+    const updateCounter = () => {
+        startValue += increment;
+        if (startValue < targetValue) {
+            element.textContent = Math.floor(startValue);
+            requestAnimationFrame(updateCounter);
+        } else {
+            element.textContent = targetValue;
+        }
+    };
+    
+    updateCounter();
+}
+
+// Load courses when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadDashboardCourses();
+    
+    // Refresh every 2 minutes
+    setInterval(loadDashboardCourses, 2 * 60 * 1000);
+});
+</script>
 
             <!-- Reports Section -->
             <section class="reports-section" id="reports">
@@ -324,21 +1089,21 @@
                     
                     <div class="footer-section">
                         <h3>Contact Info</h3>
-                        <p><i class="fas fa-envelope"></i> info@uniportal.edu</p>
-                        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 123 University Ave, Education City</p>
+                        <p><i class="fas fa-envelope"></i> farhansadik91683@UniPortal.edu</p>
+                        <p><i class="fas fa-phone"></i> +08801581173911</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Sh-46, Road-06, Dhanmondi, Dhaka-1209</p>
                         <p><a href="feedback.html"><i class="fas fa-comment"></i> Send Feedback</a></p>
                     </div>
                     
                     <div class="footer-section">
                         <h3>Support</h3>
-                        <p><a href="#"><i class="fas fa-question-circle"></i> Help Center</a></p>
-                        <p><a href="#"><i class="fas fa-file-alt"></i> Documentation</a></p>
-                        <p><a href="#"><i class="fas fa-server"></i> System Status</a></p>
-                        <p><a href="feedback.html"><i class="fas fa-headset"></i> Contact Support</a></p>
+                        <p><a href="helpCenter.html"><i class="fas fa-question-circle"></i> Help Center</a></p>
+                        <p><a href="documentation.html"><i class="fas fa-file-alt"></i> Documentation</a></p>
+                        <p><a href="systemStatus.html"><i class="fas fa-server"></i> System Status</a></p>
+                         <p><a href="contactSupport.html"><i class="fas fa-headset"></i> Contact Support</a></p>    
                     </div>
                 </div>
-                
+
                 <div class="copyright">
                     <p>&copy; 2024 UniPortal University Management System. All rights reserved.</p>
                 </div>
