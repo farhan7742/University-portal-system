@@ -1313,4 +1313,4 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// REMOVED CSS INJECTION - Using your existing style.css instead
+
