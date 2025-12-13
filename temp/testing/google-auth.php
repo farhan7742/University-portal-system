@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once 'confi.php';
 
 header('Content-Type: application/json');
 
@@ -53,3 +53,4 @@ $_SESSION['user_id'] = $userId;
 $_SESSION['is_active'] = 1;
 
 jsonResponse(true, "Google login successful");
+
