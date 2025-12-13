@@ -1,76 +1,94 @@
+// ===============================
+// DASHBOARD AUTH PROTECTION
+// ===============================
+if (localStorage.getItem('isLoggedIn') !== 'true') {
+    window.location.href = 'uniportal.html';
+}
+// Dashboard protection
+if (localStorage.getItem('isLoggedIn') !== 'true') {
+    window.location.href = 'uniportal.html';
+}
+
+// Logout
+const logoutBtn = document.getElementById('logoutBtn');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'uniportal.html';
+    });
+}
+
+// ===============================
 // Scroll to top functionality
+// ===============================
 const scrollToTopBtn = document.getElementById('scrollToTop');
 
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        scrollToTopBtn.style.display = 'block';
-    } else {
-        scrollToTopBtn.style.display = 'none';
-    }
-});
-
-scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+if (scrollToTopBtn) {
+    window.addEventListener('scroll', () => {
+        scrollToTopBtn.style.display = window.pageYOffset > 300 ? 'block' : 'none';
     });
-});
 
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// ===============================
 // Mobile sidebar toggle
+// ===============================
 const sidebarToggle = document.getElementById('sidebarToggle');
 const sidebar = document.getElementById('sidebar');
 
-sidebarToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-});
+if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+    });
 
-// Close sidebar when clicking outside on mobile
-document.addEventListener('click', (e) => {
-    if (window.innerWidth <= 768) {
-        if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target) && sidebar.classList.contains('active')) {
+    document.addEventListener('click', e => {
+        if (
+            window.innerWidth <= 768 &&
+            !sidebar.contains(e.target) &&
+            !sidebarToggle.contains(e.target) &&
+            sidebar.classList.contains('active')
+        ) {
             sidebar.classList.remove('active');
         }
-    }
-});
+    });
+}
 
-// Quick navigation functionality
-const quickNavLinks = document.querySelectorAll('.quick-nav a');
-
-quickNavLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+// ===============================
+// Quick navigation
+// ===============================
+document.querySelectorAll('.quick-nav a').forEach(link => {
+    link.addEventListener('click', e => {
         e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
+        const target = document.getElementById(link.getAttribute('href').substring(1));
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 });
 
-// Animated counter for stats
+// ===============================
+// Animated counters
+// ===============================
 function animateCounter(elementId, targetValue, duration = 2000) {
     const element = document.getElementById(elementId);
+    if (!element) return;
+
     let startValue = 0;
     const increment = targetValue / (duration / 16);
-    
-    const updateCounter = () => {
+
+    const update = () => {
         startValue += increment;
         if (startValue < targetValue) {
             element.textContent = Math.floor(startValue);
-            setTimeout(updateCounter, 16);
+            requestAnimationFrame(update);
         } else {
             element.textContent = targetValue;
         }
     };
-    
-    updateCounter();
+    update();
 }
 
-// Initialize counters when page loads
 window.addEventListener('load', () => {
     animateCounter('userCount', 1247);
     animateCounter('courseCount', 86);
@@ -78,19 +96,22 @@ window.addEventListener('load', () => {
     animateCounter('attendanceCount', 5489);
 });
 
-// Check if user is admin and show admin section
-// This is a placeholder - in a real app, you would check user role from backend
-const isAdmin = false; // Change to true to see admin section
-if (isAdmin) {
-    document.getElementById('admin-section').style.display = 'block';
+// ===============================
+// Admin section visibility
+// ===============================
+const isAdmin = false; // replace with backend value later
+const adminSection = document.getElementById('admin-section');
+if (isAdmin && adminSection) {
+    adminSection.style.display = 'block';
 }
 
-// Add active class to current page in sidebar
+// ===============================
+// Sidebar active link
+// ===============================
 const currentPage = window.location.pathname.split('/').pop();
-const sidebarLinks = document.querySelectorAll('.sidebar a');
-
-sidebarLinks.forEach(link => {
+document.querySelectorAll('.sidebar a').forEach(link => {
     if (link.getAttribute('href') === currentPage) {
         link.classList.add('active');
     }
 });
+
