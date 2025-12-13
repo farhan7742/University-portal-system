@@ -122,9 +122,10 @@
                 </div>
 
                 <div class="social-auth">
-                    <button type="button" class="social-btn Google">
-                        <i class="fab fa- Google"></i> Google
+                    <button type="button" class="social-btn google">
+                      <i class="fab fa-google"></i> Google
                     </button>
+
                 </div>
 
                 <div class="auth-footer">
@@ -235,8 +236,13 @@
                 <button class="modal-btn modal-btn-confirm" id="goToLogin">Go to Login</button>
             </div>
         </div>
-    </div>
-
+       </div>
+       <script>
+    // Login-state guard
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+        window.location.href = 'index.html';
+    }
+</script>
     <script src="uniportal.js"></script>
 </body>
 </html>
