@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+require_once 'confi.php';
 
 // Start session if not started
 if (session_status() === PHP_SESSION_NONE) {
@@ -23,4 +23,5 @@ session_destroy();
 // Redirect to login page
 header('Location: uniportal.html');
 exit();
+
 ?>
