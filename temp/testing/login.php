@@ -5,7 +5,7 @@ header("Content-Type: application/json");
 error_reporting(0);                   // Prevent warnings from breaking JSON
 // ---------------------
 
-require_once 'config.php';
+require_once 'confi.php';
 
 // Check request method
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -91,3 +91,4 @@ try {
 }
 
 ?>
+
