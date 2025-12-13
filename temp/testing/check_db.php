@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+require 'confi.php';
 $conn = getDBConnection();
 
 if (!$conn) {
@@ -20,3 +20,4 @@ while ($row = $result->fetch_assoc()) {
     echo $row['Field'] . "<br>";
 }
 ?>
+
